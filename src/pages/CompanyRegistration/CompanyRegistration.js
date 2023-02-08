@@ -43,18 +43,18 @@ const UserRegistration = () => {
                   If you want to start as user
                 </h2>
                 <p className="mt-2 text-sm text-gray-700">
-                  Do you to start an account?{" "}
+                  Do you want to start an account?{" "}
                   <a
                     className="font-medium text-blue-600 hover:underline"
                     href="/userregister"
                   >
-                    User register
+                    User registeration
                   </a>{" "}
                   to start a company account.
                 </p>
                 <div className="mt-5">
                   <h2 className="text-lg font-semibold text-gray-900">
-                    Get started for free
+                    Get started
                   </h2>
                   <p className="mt-2 text-sm text-gray-700">
                     Already registered?{" "}

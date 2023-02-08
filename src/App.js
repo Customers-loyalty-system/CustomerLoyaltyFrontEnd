@@ -20,7 +20,9 @@ const Admin = React.lazy(() =>
 const User = React.lazy(() =>
   import("./dashboards/UserDashboard/UserDashboard")
 );
-
+const AdminActivity = React.lazy(() =>
+  import("./dashboards/AdminDashboard/AdminActivity")
+);
 const App = () => {
   return (
     <>
@@ -32,6 +34,7 @@ const App = () => {
         <Route path="/company" element={<Company />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/user" element={<User />} />
+        <Route path="/adminactivites" element={<AdminActivity />} />
       </Routes>
       <Notification />
     </>
