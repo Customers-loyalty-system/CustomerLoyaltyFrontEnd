@@ -5,11 +5,9 @@ export const AuthContext = createContext();
 const UserMagnger = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "{}"));
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const [userType, setUserType] = useState("")
   const login = (userData, userToken, userType) => {
     setUser(userData);
     setToken(userToken);
-    setUserType(userType)
     localStorage.setItem("token", userToken);
     localStorage.setItem("user", JSON.stringify(userData));
   };
@@ -18,7 +16,7 @@ const UserMagnger = ({ children }) => {
     localStorage.removeItem("user");
   };
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, setUser, userType }}>
+    <AuthContext.Provider value={{ user, token, login, logout, setUser,  }}>
       {children}
     </AuthContext.Provider>
   );

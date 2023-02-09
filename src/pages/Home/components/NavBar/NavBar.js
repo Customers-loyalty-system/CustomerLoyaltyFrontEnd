@@ -1,5 +1,7 @@
+import { useState } from "react";
 import "./NavBar.css";
 const Nav = () => {
+  const [openMenu, setOpenMenu] = useState(false);
   return (
     <header className="py-10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -62,6 +64,9 @@ const Nav = () => {
                   aria-expanded="false"
                   data-headlessui-state=""
                   id="headlessui-popover-button-:R3p6:"
+                  onClick={() => {
+                    if (!openMenu) setOpenMenu(true);
+                  }}
                 >
                   <svg
                     aria-hidden="true"
@@ -69,17 +74,86 @@ const Nav = () => {
                     fill="none"
                     strokeWidth="2"
                     strokeLinecap="round"
+                    onClick={() => {
+                      if (openMenu) {
+                        setOpenMenu(false);
+                      }
+                    }}
                   >
-                    <path
-                      d="M0 1H14M0 7H14M0 13H14"
-                      className="origin-center transition"
-                    ></path>
+                    {!openMenu && (
+                      <path
+                        d="M0 1H14M0 7H14M0 13H14"
+                        className="origin-center transition"
+                      ></path>
+                    )}
                     <path
                       d="M2 2L12 12M12 2L2 12"
                       className="origin-center transition scale-90 opacity-0"
                     ></path>
+                    {openMenu && (
+                      <path
+                        d="M2 2L12 12M12 2L2 12"
+                        className="origin-center transition"
+                      ></path>
+                    )}
                   </svg>
                 </button>
+                {openMenu && (
+                  <div>
+                    <div
+                      className="fixed inset-0 bg-slate-300/50 opacity-100"
+                      id="headlessui-popover-overlay-:r30:"
+                      aria-hidden="true"
+                      data-headlessui-state="open"
+                      onClick={() => {
+                        if (openMenu) {
+                          setOpenMenu(false);
+                        }
+                      }}
+                    ></div>
+                    <div
+                      className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5 opacity-100 scale-100"
+                      id="headlessui-popover-panel-:r31:"
+                      tabIndex="-1"
+                      data-headlessui-state="open"
+                      onClick={() => {
+                        if (openMenu) {
+                          setOpenMenu(false);
+                        }
+                      }}
+                    >
+                      <a
+                        className="block w-full p-2"
+                        data-headlessui-state="open"
+                        href="/#features"
+                      >
+                        Features
+                      </a>
+                      <a
+                        className="block w-full p-2"
+                        data-headlessui-state="open"
+                        href="/#faq"
+                      >
+                        Frequently asked questions
+                      </a>
+                      <a
+                        className="block w-full p-2"
+                        data-headlessui-state="open"
+                        href="/#get-started-today"
+                      >
+                        Get started
+                      </a>
+                      <hr className="m-2 border-slate-300/40" />
+                      <a
+                        className="block w-full p-2"
+                        data-headlessui-state="open"
+                        href="/login"
+                      >
+                        Sign in
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

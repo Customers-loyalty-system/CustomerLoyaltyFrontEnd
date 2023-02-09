@@ -7,7 +7,6 @@ const Head = ({setSidenavOpen, sidenavOpen, title}) => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const logoutService = () => {
-    console.log("test");
     navigate("/");
     logout();
   };

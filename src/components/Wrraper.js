@@ -6,9 +6,7 @@ const Wrraper = (props) => {
         data-new-gr-c-s-check-loaded="14.1095.0"
         data-gr-ext-installed=""
       >
-        <div id="__next" >
             {props.children}
-        </div>
       </div>
     </>
   );

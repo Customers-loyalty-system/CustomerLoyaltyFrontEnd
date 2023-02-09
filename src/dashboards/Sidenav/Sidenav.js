@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import "../css/Dashboard.css";
-const Sidenav = ({ links, sidenavOpen }) => {
-  const { userType } = useContext(AuthContext);
+const Sidenav = ({ links, sidenavOpen  }) => {
+  const { user } = useContext(AuthContext);
   return (
     <>
       <aside
@@ -20,7 +20,7 @@ const Sidenav = ({ links, sidenavOpen }) => {
         <div className="h-19.5">
           <NavLink
             className="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700"
-            to={`/${userType}`}
+            to={`/${user.type}`}
           >
             <img
               src="../logo512.png"
@@ -35,7 +35,8 @@ const Sidenav = ({ links, sidenavOpen }) => {
         <hr className="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
         <div className="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
           <ul className="flex flex-col pl-0 mb-0">
-            {links?.map((link, i) => (
+            {links?.map((link, i) => {
+            return (
               <li key={i} className="mt-0.5 w-full">
                 <NavLink
                   to={link.target}
@@ -55,10 +56,11 @@ const Sidenav = ({ links, sidenavOpen }) => {
                   </span>
                 </NavLink>
               </li>
-            ))}
+            )})}
           </ul>
         </div>
       </aside>
+
     </>
   );
 };

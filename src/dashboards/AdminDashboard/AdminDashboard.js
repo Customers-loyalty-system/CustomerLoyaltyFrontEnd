@@ -1,32 +1,35 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect,  useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import Sidenav from "../Sidenav/Sidenav";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import Sidenav from "../Sidenav/Sidenav";
 import Head from "../Head/Head";
-import "../css/Dashboard.css";
+import { Outlet, useLocation } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
-const AdminDashboard = (props) => {
-  const navigate = useNavigate();
-  const { token, userType, logout } = useContext(AuthContext);
-  useEffect(() => {
-    if (!token || userType !== "admin") {
-      navigate("/login");
-      logout();
-    } else return;
-    // eslint-disable-next-line
-  }, []);
+const AdminDashboard = () => {
+  const { token, user, logout } = useContext(AuthContext);
   const [sidenavOpen, setSidenavOpen] = useState(false);
+  const { pathname } = useLocation()
+  
+  let title= pathname.split('/')[2]
 
   useEffect(() => {
     if (sidenavOpen) setSidenavOpen(false);
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    if (!token || user.type !== "admin") {
+      logout();
+      window.location.href = "/login";
+    } else return;
+    // eslint-disable-next-line
+  }, []);
+
   const links = [
     {
-      target: "/admin",
+      target: "/admin/add",
       text: "Add new admin",
       icon: (
         <PersonAddAlt1Icon
@@ -35,13 +38,14 @@ const AdminDashboard = (props) => {
       ),
     },
     {
-      target: "/admin-list",
+      target: "/admin/list",
       text: "Admins list",
       icon: (
         <FormatListBulletedIcon
           sx={{ color: "white", width: "15px", height: "15px" }}
         />
       ),
+
     },
   ];
   return (
@@ -52,16 +56,25 @@ const AdminDashboard = (props) => {
           if (sidenavOpen) setSidenavOpen(false);
         }}
       >
-        <Sidenav links={links} sidenavOpen={sidenavOpen} />
+        <Sidenav links={links} sidenavOpen={sidenavOpen} setSidenavOpen={setSidenavOpen}  />
         <main className="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
           <Head
-            title={props.title}
+            title={title}
             sidenavOpen={sidenavOpen}
             setSidenavOpen={setSidenavOpen}
+            links={links}
           />
-          <div className="w-full px-6 py-6 mx-auto">{props.children}</div>
+          <div className="w-full px-6 py-6 mx-auto"> <Outlet/>
+
+          </div>
         </main>
+        <div className="m-0  font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
+        <div className="ease-soft-in-out xl:ml-68.5 relative rounded-xl bg-gray-50 transition-all duration-200">
+        < Footer/>
+        </div>
+        </div>
       </div>
+    
     </>
   );
 };

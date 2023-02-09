@@ -1,12 +1,16 @@
-import AdminDashboard from "../AdminDashboard";
-
 const Add = () => {
   return (
-    <AdminDashboard title ="Add admin">
+    <>
       <h1> Add</h1>
-      </AdminDashboard>
+      <h1> Add</h1>
 
+      <h1> Add</h1>
+
+      <h1> Add</h1>
+
+      <h1> Add</h1>
+    </>
   );
 };
 
-export default Add; 
+export default Add;

@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import Sidenav from "../Sidenav/Sidenav";
 import Head from "../Head/Head";
+import { Outlet } from "react-router-dom";
 
 const UserDashboard = (props) => {
-  const navigate = useNavigate();
 
-  const { token, userType, logout } = useContext(AuthContext);
+  const { token, user, logout } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!token || userType !== "user") {
-      navigate("/login");
+    if (!token || user.type !== "user") {
+      window.location.href ="/login";
+
       logout();
     } else return;
     // eslint-disable-next-line
@@ -40,7 +40,7 @@ const UserDashboard = (props) => {
             sidenavOpen={sidenavOpen}
             setSidenavOpen={setSidenavOpen}
           />
-          <div className="w-full px-6 py-6 mx-auto">{props.children}</div>
+          <div className="w-full px-6 py-6 mx-auto"><Outlet/></div>
         </main>
       </div>
     </>
