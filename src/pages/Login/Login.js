@@ -27,18 +27,18 @@ const Login = () => {
           user.data.token,
           "admin"
         );
-        nvaigate("/admin");
+        nvaigate("/admin/");
       }
       if (types.includes("user")) {
         authCtx.login({ ...user.data.user, type: "user" }, user.data.token);
-        nvaigate("/user");
+        nvaigate("/user/");
       }
       if (types.includes("company")) {
         authCtx.login(
           { ...user.data.company, type: "company" },
           user.data.token
         );
-        nvaigate("/company");
+        nvaigate("/company/");
       }
     }
   };

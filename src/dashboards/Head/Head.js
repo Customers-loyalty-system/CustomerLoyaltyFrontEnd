@@ -2,9 +2,12 @@ import "../css/Dashboard.css";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { TitleContext } from "../../context/TitleContext";
 
-const Head = ({setSidenavOpen, sidenavOpen, title}) => {
+const Head = ({setSidenavOpen, sidenavOpen}) => {
   const { logout } = useContext(AuthContext);
+  const { title } = useContext(TitleContext);
+
   const navigate = useNavigate();
   const logoutService = () => {
     navigate("/");

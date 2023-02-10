@@ -3,7 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import Sidenav from "../Sidenav/Sidenav";
 import Head from "../Head/Head";
 import { Outlet } from "react-router-dom";
-
+import CardMembershipIcon from '@mui/icons-material/CardMembership';
 const UserDashboard = (props) => {
 
   const { token, user, logout } = useContext(AuthContext);
@@ -23,8 +23,17 @@ const UserDashboard = (props) => {
     if (sidenavOpen) setSidenavOpen(false);
     // eslint-disable-next-line
   }, []);
-  const links = [];
-
+  const links = [
+    {
+      target: "/user/",
+      text: "Memberships",
+      icon: (
+        <CardMembershipIcon
+          sx={{ color: "white", width: "15px", height: "15px" }}
+        />
+      ),
+    },
+  ];
   return (
     <>
       <div

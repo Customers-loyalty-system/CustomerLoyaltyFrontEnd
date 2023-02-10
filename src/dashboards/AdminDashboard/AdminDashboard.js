@@ -4,15 +4,13 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import Sidenav from "../Sidenav/Sidenav";
 import Head from "../Head/Head";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 
 const AdminDashboard = () => {
   const { token, user, logout } = useContext(AuthContext);
   const [sidenavOpen, setSidenavOpen] = useState(false);
-  const { pathname } = useLocation()
   
-  let title= pathname.split('/')[2]
 
   useEffect(() => {
     if (sidenavOpen) setSidenavOpen(false);
@@ -29,7 +27,7 @@ const AdminDashboard = () => {
 
   const links = [
     {
-      target: "/admin/add",
+      target: "/admin/",
       text: "Add new admin",
       icon: (
         <PersonAddAlt1Icon
@@ -59,10 +57,8 @@ const AdminDashboard = () => {
         <Sidenav links={links} sidenavOpen={sidenavOpen} setSidenavOpen={setSidenavOpen}  />
         <main className="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
           <Head
-            title={title}
             sidenavOpen={sidenavOpen}
             setSidenavOpen={setSidenavOpen}
-            links={links}
           />
           <div className="w-full px-6 py-6 mx-auto"> <Outlet/>
 

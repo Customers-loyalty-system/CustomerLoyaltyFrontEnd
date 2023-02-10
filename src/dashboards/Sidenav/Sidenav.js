@@ -20,7 +20,7 @@ const Sidenav = ({ links, sidenavOpen  }) => {
         <div className="h-19.5">
           <NavLink
             className="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700"
-            to={`/${user.type}`}
+            to={`/${user.type}/`}
           >
             <img
               src="../logo512.png"
