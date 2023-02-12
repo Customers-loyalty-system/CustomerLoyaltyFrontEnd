@@ -24,6 +24,9 @@ const Update = React.lazy(()=> import( "./dashboards/AdminDashboard/components/U
 const Memberships = React.lazy(()=> import( "./dashboards/UserDashboard/components/Memberships"))
 const Activitiy = React.lazy(()=> import( "./dashboards/AdminDashboard/components/Activitiy"))
 const AddBill = React.lazy(()=> import( "./dashboards/AdminDashboard/components/AddBill"))
+const Members = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Members"))
+const MembersActivity = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/MembersActivity"))
+const Rules = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Rules"))
 
 
 const App = () => {
@@ -34,9 +37,14 @@ const App = () => {
         <Route path="/login" element={<Suspense><Login /></Suspense>} />
         <Route path="/userregister" element={<Suspense><UserRegistration /></Suspense>} />
         <Route path="/companyregister" element={<Suspense><CompanyRegistration /></Suspense> } />
-        <Route path="/company" element={<Suspense><Company /></Suspense>} ></Route>
+        <Route path="company/" element={<Suspense><Company /></Suspense>} >
+          <Route path="" element={<Suspense> <Members/></Suspense>}/>
+          <Route path="membersactivities" element={<Suspense> <MembersActivity/></Suspense>}/>
+          <Route path="rules" element={<Suspense> <Rules/></Suspense>}/>
+
+        </Route>
         <Route path="/user" element={<Suspense><User /> </Suspense>} >
-          <Route path="" element={<Suspense> <Memberships/></Suspense>}></Route>
+          <Route path="" element={<Suspense> <Memberships/></Suspense>}/>
         </Route>
         <Route path="admin/" element={<Suspense><Admin /> </Suspense>} > 
           <Route path="" element={<Suspense><Add /> </Suspense>} /> 

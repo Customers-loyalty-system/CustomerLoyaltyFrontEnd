@@ -4,6 +4,7 @@ import Sidenav from "../Sidenav/Sidenav";
 import Head from "../Head/Head";
 import { Outlet } from "react-router-dom";
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
+import Footer from "../Footer/Footer";
 const UserDashboard = (props) => {
 
   const { token, user, logout } = useContext(AuthContext);
@@ -51,6 +52,11 @@ const UserDashboard = (props) => {
           />
           <div className="w-full px-6 py-6 mx-auto"><Outlet/></div>
         </main>
+        <div className="m-0  font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
+        <div className="ease-soft-in-out xl:ml-68.5 relative rounded-xl bg-gray-50 transition-all duration-200">
+        < Footer/>
+        </div>
+        </div>
       </div>
     </>
   );

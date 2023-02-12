@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 const UserMagnger = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "{}"));
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const login = (userData, userToken ) => {
+  const login = (userData, userToken) => {
     setUser(userData);
     setToken(userToken);
     localStorage.setItem("token", userToken);
