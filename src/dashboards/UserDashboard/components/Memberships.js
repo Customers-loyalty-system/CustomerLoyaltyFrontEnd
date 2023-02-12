@@ -1,13 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { TitleContext } from "../../../context/TitleContext";
 import UseFetch from "../../../custom/UseFetch";
-import { AuthContext } from "../../../context/AuthContext";
 import StanderdPoints from "./StanderdPoints";
 import TierPoints from "./TierPoints";
+import { AlertContex } from "../../../context/AlertContext";
+import { AuthContext } from "../../../context/AuthContext";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import { Activities } from "./Activities";
 
 const Memberships = () => {
   const { setTitle } = useContext(TitleContext);
   const { token } = useContext(AuthContext);
+  const { toggleOn } = useContext(AlertContex);
+  const  [popUp ,setPopUp] = useState(false)
+
   const [memberships, setMemberships] = useState([]);
   const getMemberships = async () => {
     const response = await UseFetch(
@@ -17,12 +24,14 @@ const Memberships = () => {
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
     if ((await response.data.length) > 0) {
+      toggleOn(response.messages, response.success);
       setMemberships([...response.data]);
-    } else alert("no data");
+    } else {
+      toggleOn(response.messages, response.success);
+    }
   };
-
   useEffect(() => {
-    setTitle("Add new admin");
+    setTitle("Memperships");
     getMemberships();
     // eslint-disable-next-line
   }, []);
@@ -37,7 +46,7 @@ const Memberships = () => {
                 key={i}
                 className="relative flex flex-col items-center shadow-soft-xl rounded-2xl bg-clip-border w-full bg-white "
               >
-                <div className="relative w-full flex flex-row mb-5 mt-3  ">
+                <div className="relative w-full flex flex-row mb-1 mt-3  ">
                   <img
                     alt="company logo"
                     src={membership.company.logo}
@@ -49,8 +58,30 @@ const Memberships = () => {
                 </div>
                 <StanderdPoints membership={membership} />
 
-                <hr className="h-px w-full mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent "/>
+                <hr className="h-px w-full mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent " />
                 <TierPoints membership={membership} />
+                <hr className="h-px w-full bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent " />
+                <div className="flex flex-row w-full justify-around mb-2 ">
+                  <div  className="flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer bg-center items-center justify-center p-2   ">
+                    <GroupAddIcon
+                      className=""
+                      sx={{
+                        fontSize: "25px",
+                      }}
+                    />
+                  </div>
+                  {popUp && <Activities company ={membership.company} popUp = {popUp} setPopUp = {setPopUp}/>}
+                  <div onClick={() => {
+                    setPopUp(true)
+                  }} className=" flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer  bg-center items-center justify-center p-2  ">
+                    <ReceiptLongIcon
+                      className=""
+                      sx={{
+                        fontSize: "25px",
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             );
           })}

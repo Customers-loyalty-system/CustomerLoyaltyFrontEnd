@@ -11,7 +11,6 @@ const UserDashboard = (props) => {
   useEffect(() => {
     if (!token || user.type !== "user") {
       window.location.href ="/login";
-
       logout();
     } else return;
     // eslint-disable-next-line
@@ -27,6 +26,15 @@ const UserDashboard = (props) => {
     {
       target: "/user/",
       text: "Memberships",
+      icon: (
+        <CardMembershipIcon
+          sx={{ color: "white", width: "15px", height: "15px" }}
+        />
+      ),
+    },
+    {
+      target: "/user/profile",
+      text: "Profile",
       icon: (
         <CardMembershipIcon
           sx={{ color: "white", width: "15px", height: "15px" }}

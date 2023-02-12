@@ -1,6 +1,7 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
+
 const StanderdPoints = ({ membership }) => {
   const configurations = membership.company.Configurations;
   let maxValue;
@@ -10,9 +11,10 @@ const StanderdPoints = ({ membership }) => {
     }
     return maxValue;
   });
-  
+
   return (
     <>
+      
       <div className="text-center font-medium text-black">Standard points</div>
       <div
         style={{ width: 100, height: 100 }}
@@ -30,7 +32,11 @@ const StanderdPoints = ({ membership }) => {
           circleRatio={0.75}
           value={membership.standardPoints}
           maxValue={maxValue}
-          text={`${ membership.standardPoints!== 0 ? Math.round((membership.standardPoints * 100) / maxValue): 0}%`}
+          text={`${
+            membership.standardPoints !== 0
+              ? Math.round((membership.standardPoints * 100) / maxValue)
+              : 0
+          }%`}
         />
       </div>
     </>

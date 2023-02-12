@@ -8,7 +8,7 @@ function SlideTransition(props) {
   return <Slide {...props} direction="left" />;
 }
 
-const SimpleSnackbar = ({}) => {
+const SimpleSnackbar = () => {
   // eslint-disable-next-line
   const {
     open: openGlobal,
