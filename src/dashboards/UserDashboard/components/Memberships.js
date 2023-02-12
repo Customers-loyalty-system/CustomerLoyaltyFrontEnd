@@ -18,7 +18,7 @@ const Memberships = () => {
     );
     if ((await response.data.length) > 0) {
       setMemberships([...response.data]);
-    } else alert("no data");
+    } else return;
   };
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const Memberships = () => {
                 </div>
                 <StanderdPoints membership={membership} />
 
-                <hr className="h-px w-full mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent "/>
+                <hr className="h-px w-full mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent " />
                 <TierPoints membership={membership} />
               </div>
             );
