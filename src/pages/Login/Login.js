@@ -17,7 +17,7 @@ const Login = () => {
       email: emailref.current.value,
       password: passwordref.current.value,
     };
-    const user = await UseFetch(process.env.REACT_APP_API_LOGIN, "POST", body);
+    const user = await UseFetch(process.env.REACT_APP_API_LOGIN, "POST", body,{"Content-Type": "Application/json"});
     toggleOn(user.messages, user.success);
     if (user.success) {
       const types = Object.keys(user.data);

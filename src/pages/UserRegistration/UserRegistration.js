@@ -8,6 +8,7 @@ const UserRegistration = () => {
   const { toggleOn } = useContext(AlertContex);
 
   const addUser = async (e) => {
+    console.log(e.target)
     e.preventDefault();
     const data = new FormData(e.target);
     const connect = await fetch(`${process.env.REACT_APP_API_USER_REGISTER}`, {
