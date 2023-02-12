@@ -3,7 +3,10 @@ import { AuthContext } from "../../context/AuthContext";
 import Sidenav from "../Sidenav/Sidenav";
 import Head from "../Head/Head";
 import { Outlet } from "react-router-dom";
-
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import ReorderIcon from '@mui/icons-material/Reorder';
+import TuneIcon from '@mui/icons-material/Tune';
+import Footer from "../Footer/Footer";
 const CompanyDashboard = (props) => {
   const { token, user, logout } = useContext(AuthContext);
 
@@ -21,7 +24,29 @@ const CompanyDashboard = (props) => {
     if (sidenavOpen) setSidenavOpen(false);
     // eslint-disable-next-line
   }, []);
-  const links = [];
+  const links = [
+    {
+      target: "/company/",
+      text: "Members",
+      icon: (
+        <LoyaltyIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+      ),
+    },
+    {
+      target: "/company/membersactivities",
+      text: "Members Activities",
+      icon: (
+        <ReorderIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+      ),
+    },
+    {
+      target: "/company/rules",
+      text: "Company rules",
+      icon: (
+        <TuneIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+      ),
+    },
+  ];
   return (
     <>
       <div
@@ -37,8 +62,15 @@ const CompanyDashboard = (props) => {
             sidenavOpen={sidenavOpen}
             setSidenavOpen={setSidenavOpen}
           />
-          <div className="w-full px-6 py-6 mx-auto"><Outlet/></div>
+          <div className="w-full px-6 py-6 mx-auto">
+            <Outlet />
+          </div>
         </main>
+        <div className="m-0  font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
+          <div className="ease-soft-in-out xl:ml-68.5 relative rounded-xl bg-gray-50 transition-all duration-200">
+            <Footer />
+          </div>
+        </div>
       </div>
     </>
   );

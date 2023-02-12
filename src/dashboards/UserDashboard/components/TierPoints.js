@@ -37,6 +37,7 @@ const TierPoints = ({ membership }) => {
     <>
       <div className="text-center font-medium text-black">Tier points</div>
       <div className="text-center font-medium" style={{color: colors[membership.membershipTier]}}>{membership.membershipTier}</div>
+
       <div
         style={{ width: 100, height: 100 }}
         className="self-center mt-5 mb-3"

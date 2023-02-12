@@ -13,7 +13,7 @@ export const Activities = ({ company, popUp, setPopUp }) => {
   const [activites, setActivities] = useState([]);
   const { token , user } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
-  const [counter , setCounter ] = useState(1)
+  const [page , setPage ] = useState(1)
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
       padding: theme.spacing(2),
@@ -22,13 +22,14 @@ export const Activities = ({ company, popUp, setPopUp }) => {
       padding: theme.spacing(1),
     },
   }));
-  const getActivities = async () => {
-    const response = await UseFetch(`${process.env.REACT_APP_API_GET_ALL_ACTIVITIES}?page=${counter}`,
+  const getActivities = async (pageNum) => {
+    const response = await UseFetch(`${process.env.REACT_APP_API_GET_ACTIVITIES}?page=${pageNum}`,
       "GET",
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    console.log(response)
+    console.log(response) 
+    
   //   if (response.success) {
   //     toggleOn(response.messages, response.success);
   //     const newData = response.data.filter((item) => item?.Bill?.comapnyId === company.id);
@@ -38,10 +39,10 @@ export const Activities = ({ company, popUp, setPopUp }) => {
   //   }
   };
 
-  console.log(activites);
+  // console.log(activites);
 
   useEffect(() => {
-    getActivities();
+    getActivities(page);
     // eslint-disable-next-line
   }, []);
 
@@ -119,7 +120,7 @@ export const Activities = ({ company, popUp, setPopUp }) => {
         <Button color="error" onClick={() => setPopUp(false)}>
           close
         </Button>
-        <Button color="error" onClick={() => setCounter(prev => prev++)}>
+        <Button color="error">
           close
         </Button>
       </DialogActions>
