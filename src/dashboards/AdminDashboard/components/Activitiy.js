@@ -2,15 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { TitleContext } from "../../../context/TitleContext";
 
-const List = () => {
+const Activitiy = () => {
   const { setTitle } = useContext(TitleContext);
-  const [admins, setAdmins] = useState([]);
+  const [Activities, setActivities] = useState([]);
   const { token } = useContext(AuthContext);
 
-  const getAdmins = async () => {
+  const getActivities = async () => {
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaa");
 
-    const response = await fetch(`http://localhost:3002/api/v1/admins`, {
+    const response = await fetch(`http://localhost:3002/api/v1/activities`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -18,15 +18,19 @@ const List = () => {
       },
     });
     const json = await response.json();
+    console.log("ssssssssssss", json);
+
     if (json.success) {
-      setAdmins(json.data);
+      setActivities(json.data);
+    console.log("ssssssssssss", json.data);
+
     }
-    console.log("ssssssssssss", admins);
+    console.log("ssssssssssss", Activities);
   };
 
   useEffect(() => {
-    setTitle("Admis Lists");
-    getAdmins();
+    setTitle("Admis Activities");
+    getActivities();
     // eslint-disable-next-line
   }, []);
   return (
@@ -48,6 +52,15 @@ const List = () => {
                       STANDARD POINTS
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                      STANDARD POINTS
+                    </th>
+                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                      STANDARD POINTS
+                    </th>
+                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                      STANDARD POINTS
+                    </th>
+                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       TIERS POINTS
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
@@ -56,28 +69,43 @@ const List = () => {
                   </tr>
                 </thead>
 
-                {admins?.map((admin, i) => {
+                {Activities?.map((Activitiy, i) => {
                   return (
                     <tbody>
                       <tr>
                         <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <p className="mb-0 font-semibold leading-tight text-xs">
-                            <div>{admin?.name}</div>
+                            <div>{Activitiy?.memberId}</div>
                           </p>
                         </td>
                         <td className="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
                           <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{admin?.email}</div>
+                            <div>{Activitiy?.type}</div>
                           </span>
                         </td>
                         <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{admin?.createdAt}</div>
+                            <div>{Activitiy?.standardPoints}</div>
                           </span>
                         </td>
                         <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <span className="font-semibold leading-tight text-xs text-slate-400">
-                         
+                            <div>{Activitiy?.tiresPoints}</div>
+                          </span>
+                        </td>
+                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <span className="font-semibold leading-tight text-xs text-slate-400">
+                            <div>{Activitiy?.billId}</div>
+                          </span>
+                        </td>
+                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <span className="font-semibold leading-tight text-xs text-slate-400">
+                            <div>{Activitiy?.createdAt}</div>
+                          </span>
+                        </td>
+                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <span className="font-semibold leading-tight text-xs text-slate-400">
+                            {" "}
                             <a
                               href="#"
                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
@@ -99,4 +127,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default Activitiy;

@@ -6,6 +6,9 @@ import Sidenav from "../Sidenav/Sidenav";
 import Head from "../Head/Head";
 import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
+import LoopIcon from '@mui/icons-material/Loop'
+import NoteAltIcon from '@mui/icons-material/NoteAlt';
+import DescriptionIcon from '@mui/icons-material/Description';
 
 const AdminDashboard = () => {
   const { token, user, logout } = useContext(AuthContext);
@@ -45,6 +48,31 @@ const AdminDashboard = () => {
       ),
 
     },
+    {
+      target: "/admin/Update",
+      text: "update admin",
+      icon: (
+        <LoopIcon color="#FFFFFF"/> 
+      ),
+
+    },
+    {
+      target: "/admin/activities",
+      text: " Activities",
+      icon: (
+       < NoteAltIcon/>
+      ),
+
+    },
+    {
+      target: "/admin/addbill",
+      text: " addbill",
+      icon: (
+        <DescriptionIcon/>
+       
+      ),
+
+    }
   ];
   return (
     <>
@@ -60,7 +88,7 @@ const AdminDashboard = () => {
             sidenavOpen={sidenavOpen}
             setSidenavOpen={setSidenavOpen}
           />
-          <div className="w-full px-6 py-6 mx-auto"> <Outlet/>
+          <div className="w-full px-6 py-6 mx-auto  "> <Outlet/>
 
           </div>
         </main>
