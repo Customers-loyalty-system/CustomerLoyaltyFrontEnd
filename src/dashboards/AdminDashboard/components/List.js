@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import { TitleContext } from "../../../context/TitleContext";
 
@@ -77,13 +78,12 @@ const List = () => {
                         </td>
                         <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <span className="font-semibold leading-tight text-xs text-slate-400">
-                         
-                            <a
-                              href="#"
+                            <Link
+                                to={"#"}
                               class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                             >
                               delete
-                            </a>
+                            </Link>
                           </span>
                         </td>
                       </tr>

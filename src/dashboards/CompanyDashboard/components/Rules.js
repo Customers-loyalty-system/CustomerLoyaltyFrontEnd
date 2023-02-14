@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { AlertContex } from "../../../context/AlertContext";
 import { TitleContext } from "../../../context/TitleContext";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import UseFetch from "../../../custom/UseFetch";
