@@ -3,7 +3,7 @@ const UseFetch = async (
   url,
   method,
   body,
-  content = "application/json"
+  content
 ) => {
   var connect;
   if (body != null ) {
@@ -19,7 +19,7 @@ const UseFetch = async (
     });
   }
   const response = await connect.json();
-  console.log("response.messages==>", response.messages);
+  console.log("response.messages ==> ", response.messages);
   return response;
 };
 

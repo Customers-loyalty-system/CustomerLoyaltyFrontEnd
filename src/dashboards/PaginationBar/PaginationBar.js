@@ -7,8 +7,10 @@ const PaginationBar = ({pageCount, setPage}) => {
         setPage(p)
     }
   return (
-    <Stack spacing={2}>
-      <Pagination count={pageCount} onChange={handelOnchange}  shape="rounded" />
+    <Stack  spacing={2}>
+      <Pagination sx={{
+        padding:"5px" ,
+      }} count={pageCount} onChange={handelOnchange}  shape="rounded" />
     </Stack>
   );
 }
