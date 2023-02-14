@@ -8,6 +8,7 @@ const UserMagnger = ({ children }) => {
   const login = (userData, userToken) => {
     setUser(userData);
     setToken(userToken);
+    console.log(userData)
     localStorage.setItem("token", userToken);
     localStorage.setItem("user", JSON.stringify(userData));
   };

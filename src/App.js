@@ -3,6 +3,7 @@ import React, { Suspense} from "react";
 import { Route, Routes } from "react-router-dom";
 import Notification from "./components/Notifications/Notifications";
 import Login from "./pages/Login/Login"
+import Configurations from "./dashboards/CompanyDashboard/components/Configurations";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const UserRegistration = React.lazy(() =>
@@ -29,6 +30,8 @@ const AddBill = React.lazy(()=> import( "./dashboards/AdminDashboard/components/
 const Members = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Members"))
 const MembersActivity = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/MembersActivity"))
 const Rules = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Rules"))
+const configurations = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Configurations"))
+
 
 
 const App = () => {
@@ -44,7 +47,7 @@ const App = () => {
           <Route path="" element={<Suspense> <Members/></Suspense>}/>
           <Route path="membersactivities" element={<Suspense> <MembersActivity/></Suspense>}/>
           <Route path="rules" element={<Suspense> <Rules/></Suspense>}/>
-
+          <Route path="configurations" element={<Suspense><Configurations/></Suspense>}/>
         </Route>
 
         <Route path="/user" element={<Suspense><User /> </Suspense>} >

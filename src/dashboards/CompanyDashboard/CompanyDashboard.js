@@ -6,7 +6,8 @@ import { Outlet } from "react-router-dom";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import ReorderIcon from '@mui/icons-material/Reorder';
 import TuneIcon from '@mui/icons-material/Tune';
-import Footer from "../Footer/Footer";
+import SettingsInputCompositeIcon from '@mui/icons-material/SettingsInputComposite';
+
 const CompanyDashboard = (props) => {
   const { token, user, logout } = useContext(AuthContext);
 
@@ -34,29 +35,37 @@ const CompanyDashboard = (props) => {
     },
     {
       target: "/company/membersactivities",
-      text: "Members Activities",
+      text: "Activities",
       icon: (
         <ReorderIcon sx={{ color: "white", width: "18px", height: "18px" }} />
       ),
     },
     {
       target: "/company/rules",
-      text: "Company rules",
+      text: "Rules",
       icon: (
         <TuneIcon sx={{ color: "white", width: "18px", height: "18px" }} />
       ),
     },
+    {
+      target: "/company/configurations",
+      text: "Configurations",
+      icon: (
+        <SettingsInputCompositeIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+      ),
+    },
+
   ];
   return (
     <>
-      <div
-        className="m-0 h-screen font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500"
+      <div 
+        className="m-0 h-auto min-h-screen font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500"
         onClick={() => {
           if (sidenavOpen) setSidenavOpen(false);
         }}
       >
         <Sidenav links={links} sidenavOpen={sidenavOpen} />
-        <main className="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
+        <main className="ease-soft-in-out xl:ml-68.5 relative h-full  rounded-xl transition-all duration-200">
           <Head
             title={props.title}
             sidenavOpen={sidenavOpen}
@@ -66,11 +75,6 @@ const CompanyDashboard = (props) => {
             <Outlet />
           </div>
         </main>
-        <div className="m-0  font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
-          <div className="ease-soft-in-out xl:ml-68.5 relative rounded-xl bg-gray-50 transition-all duration-200">
-            <Footer />
-          </div>
-        </div>
       </div>
     </>
   );
