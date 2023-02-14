@@ -11,9 +11,9 @@ import { AuthContext } from "../../../context/AuthContext";
 
 export const Activities = ({ company, popUp, setPopUp }) => {
   const [activites, setActivities] = useState([]);
-  const { token , user } = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
-  const [page , setPage ] = useState(1)
+  const [page, setPage] = useState(1);
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
       padding: theme.spacing(2),
@@ -23,20 +23,25 @@ export const Activities = ({ company, popUp, setPopUp }) => {
     },
   }));
   const getActivities = async (pageNum) => {
-    const response = await UseFetch(`${process.env.REACT_APP_API_GET_ACTIVITIES}?page=${pageNum}`,
+    const response = await UseFetch(
+      `${process.env.REACT_APP_API_GET_ACTIVITIES}?page=${pageNum}`,
       "GET",
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    console.log(response) 
-    
-  //   if (response.success) {
-  //     toggleOn(response.messages, response.success);
-  //     const newData = response.data.filter((item) => item?.Bill?.comapnyId === company.id);
-  //     setActivities([newData]);
-  //   } else {
-  //     toggleOn(response.messages, response.success);
-  //   }
+      
+    if (response.success) {
+      toggleOn(response.messages, response.success);
+      console.log(response)
+      const newData = response.data.rows.filter(
+        (item) =>
+           item?.Membership?.comapnyId == company.id
+      );
+        console.log(newData)
+      setActivities([newData]);
+    } else {
+      toggleOn(response.messages, response.success);
+    }
   };
 
   // console.log(activites);
@@ -53,7 +58,7 @@ export const Activities = ({ company, popUp, setPopUp }) => {
       open={popUp}
     >
       <DialogContent dividers>
-        {/* <div className="flex flex-wrap -mx-3 ">
+        <div className="flex flex-wrap -mx-3 ">
           <div className="flex-none w-full max-w-full px-3">
             <div className="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
               <h6>Activites</h6>
@@ -67,19 +72,19 @@ export const Activities = ({ company, popUp, setPopUp }) => {
                         type
                       </th>
                       <th className="px-4 py-3 pl-2 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                      standard Points
+                        standard Points
                       </th>
                       <th className="px-4 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                      tiers Points
+                        tiers Points
                       </th>
                       <th className="px-4 py-3  font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                      bill Number
+                        bill Number
                       </th>
                       <th className="px-4 py-3 font-semibold capitalize align-middle bg-transparent border-b border-gray-200 border-solid shadow-none tracking-none whitespace-nowrap text-slate-400 opacity-70"></th>
                     </tr>
                   </thead>
-                  {activites?.map((activity) => (
-                    <tbody key={activity.id}>
+                  <tbody>
+                    {activites?.map((activity) => (
                       <tr>
                         <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <div className="flex px-2 py-1">
@@ -99,18 +104,16 @@ export const Activities = ({ company, popUp, setPopUp }) => {
                           {activity?.tiersPoints}
                         </td>
                         <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                          <span className="font-semibold leading-tight text-xs text-slate-400">
-                          {activity?.Bill.billNumber}
-                          </span>
+                          <span className="font-semibold leading-tight text-xs text-slate-400"></span>
                         </td>
                       </tr>
-                    </tbody>
-                  ))}
+                    ))}
+                  </tbody>
                 </table>
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </DialogContent>
       <DialogActions
         sx={{
@@ -120,9 +123,7 @@ export const Activities = ({ company, popUp, setPopUp }) => {
         <Button color="error" onClick={() => setPopUp(false)}>
           close
         </Button>
-        <Button color="error">
-          close
-        </Button>
+        <Button color="error">close</Button>
       </DialogActions>
     </BootstrapDialog>
   );

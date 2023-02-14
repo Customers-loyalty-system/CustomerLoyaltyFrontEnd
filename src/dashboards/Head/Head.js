@@ -1,12 +1,22 @@
 import "../css/Dashboard.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { TitleContext } from "../../context/TitleContext";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import CompanyProfile from "../CompanyDashboard/components/CompanyProfile";
 
-const Head = ({setSidenavOpen, sidenavOpen}) => {
+const Head = ({ setSidenavOpen, sidenavOpen }) => {
   const { logout } = useContext(AuthContext);
   const { title } = useContext(TitleContext);
+  const {  user} = useContext(AuthContext);
+
+  const [companyProfile, setCompanyProfile] = useState(false);
+
+
+  const handleClickOpen = () => {
+    if (user.type === "company") setCompanyProfile(true);
+  };
 
   const navigate = useNavigate();
   const logoutService = () => {
@@ -37,21 +47,40 @@ const Head = ({setSidenavOpen, sidenavOpen}) => {
 
           <div className="flex justify-end items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
             <ul className="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-              <li onClick={()=>{ 
-                if (sidenavOpen) setSidenavOpen(false)
-                else setSidenavOpen (true)
-              }} 
-                className="flex  items-center mr-3 pl-4 xl:hidden">
-                  <div className="w-4.5 cursor-pointer overflow-hidden">
-                    <i className={sidenavOpen ? `ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 ` : 
-                    `ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all translate-x-[5px]`}></i>
-                    <i className="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                    <i className={sidenavOpen ? `ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all` : 
-                    `ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 translate-x-[5px]`}></i>
-                  </div>
+              <li
+                onClick={() => {
+                  if (sidenavOpen) setSidenavOpen(false);
+                  else setSidenavOpen(true);
+                }}
+                className="flex  items-center mr-3 pl-4 xl:hidden"
+              >
+                <div className="w-4.5 cursor-pointer overflow-hidden">
+                  <i
+                    className={
+                      sidenavOpen
+                        ? `ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 `
+                        : `ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all translate-x-[5px]`
+                    }
+                  ></i>
+                  <i className="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
+                  <i
+                    className={
+                      sidenavOpen
+                        ? `ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all`
+                        : `ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 translate-x-[5px]`
+                    }
+                  ></i>
+                </div>
               </li>
 
               <li className="flex items-center">
+                <button
+                  className="block px-0 py-2 font-semibold transition-all mr-4 ease-nav-brand text-sm text-slate-500"
+                  onClick={handleClickOpen}
+                >
+                  <span className="hidden sm:inline mr-3">Profile</span>
+                  <ManageAccountsIcon />
+                </button>
                 <button
                   className="block px-0 py-2 font-semibold transition-all ease-nav-brand text-sm text-slate-500"
                   onClick={logoutService}
@@ -71,6 +100,7 @@ const Head = ({setSidenavOpen, sidenavOpen}) => {
             </ul>
           </div>
         </div>
+        <CompanyProfile companyProfile={companyProfile} setCompanyProfile={setCompanyProfile} />
       </nav>
     </>
   );

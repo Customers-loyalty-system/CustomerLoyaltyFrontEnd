@@ -52,7 +52,7 @@ const UserDashboard = (props) => {
         }}
       >
         <Sidenav links={links} sidenavOpen={sidenavOpen} />
-        <main className="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
+        <main className="ease-soft-in-out xl:ml-68.5 relative h-screen max-h-screen rounded-xl transition-all duration-200">
           <Head
             title={props.title}
             sidenavOpen={sidenavOpen}
@@ -60,12 +60,7 @@ const UserDashboard = (props) => {
           />
           <div className="w-full px-6 py-6 mx-auto"><Outlet/></div>
         </main>
-        <div className="m-0  font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
-        <div className="ease-soft-in-out xl:ml-68.5 relative rounded-xl bg-gray-50 transition-all duration-200">
-        < Footer/>
-        </div>
-        </div>
-      </div>
+=      </div>
     </>
   );
 };
