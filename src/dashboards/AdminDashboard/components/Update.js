@@ -34,14 +34,14 @@ const Update = () => {
 
   };
   useEffect(() => {
-    setTitle("Add new admin");
+    setTitle("update admin");
     // eslint-disable-next-line
   }, []);
   return (
     <>
       <div class="w-1/2 bg-white rounded shadow-2xl p-8 m-4">
         <h4 class="block w-full text-center text-gray-800 text-2xl font-bold mb-3">
-          update your account
+            UPDATE ADMIN  ACCOUNT
         </h4>
 
         <div class="flex flex-col mb-4">

@@ -33,7 +33,7 @@ const Sidenav = ({ links, sidenavOpen  }) => {
           </NavLink>
         </div>
         <hr className="h-0.5  mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent"/>
-        <div className="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
+        <div className="items-center block w-auto  overflow-auto h-auto grow basis-full">
           <ul className="flex flex-col pl-0 mb-0">
             {links?.map((link, i) => {
             return (

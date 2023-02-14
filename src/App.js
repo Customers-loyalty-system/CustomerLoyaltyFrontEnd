@@ -27,6 +27,7 @@ const AddBill = React.lazy(()=> import( "./dashboards/AdminDashboard/components/
 const Members = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Members"))
 const MembersActivity = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/MembersActivity"))
 const Rules = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Rules"))
+const MemberRelation = React.lazy(()=> import( "./dashboards/AdminDashboard/components/MemberRelation"))
 
 
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="Update" element={<Suspense><Update /></Suspense>} /> 
           <Route path="activities" element={<Suspense><Activitiy /></Suspense>} /> 
           <Route path="addbill" element={<Suspense><AddBill /></Suspense>} /> 
+          <Route path="MemberRelation" element={<Suspense><MemberRelation /></Suspense>} /> 
         </Route>
       </Routes>
       <Notification />

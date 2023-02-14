@@ -50,9 +50,9 @@ const AdminDashboard = () => {
     },
     {
       target: "/admin/Update",
-      text: "update admin",
+      text: "updateadmin",
       icon: (
-        <LoopIcon color="#FFFFFF"/> 
+        <LoopIcon sx={{ color: "white", width: "18px", height: "18px" }} /> 
       ),
 
     },
@@ -60,7 +60,7 @@ const AdminDashboard = () => {
       target: "/admin/activities",
       text: " Activities",
       icon: (
-       < NoteAltIcon/>
+       < NoteAltIcon sx={{ color: "white", width: "18px", height: "18px" }} />
       ),
 
     },
@@ -68,7 +68,16 @@ const AdminDashboard = () => {
       target: "/admin/addbill",
       text: " addbill",
       icon: (
-        <DescriptionIcon/>
+        <DescriptionIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+       
+      ),
+
+    },
+    {
+      target: "/admin/memberrelation",
+      text: " member relation",
+      icon: (
+        <DescriptionIcon sx={{ color: "white", width: "18px", height: "18px" }} />
        
       ),
 
@@ -77,7 +86,7 @@ const AdminDashboard = () => {
   return (
     <>
       <div
-        className="m-0 h-screen font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500"
+        className="m-0 h-auto min-h-screen  h-screen font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500"
         onClick={() => {
           if (sidenavOpen) setSidenavOpen(false);
         }}
@@ -92,11 +101,6 @@ const AdminDashboard = () => {
 
           </div>
         </main>
-        <div className="m-0  font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500">
-        <div className="ease-soft-in-out xl:ml-68.5 relative rounded-xl bg-gray-50 transition-all duration-200">
-        < Footer/>
-        </div>
-        </div>
       </div>
     
     </>
