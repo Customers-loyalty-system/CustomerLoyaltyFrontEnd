@@ -1,38 +1,45 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { TitleContext } from "../../../context/TitleContext";
+import UseFetch from "../../../custom/UseFetch";
+import PaginationBar from "../../PaginationBar/PaginationBar";
+import { AlertContex } from "../../../context/AlertContext";
+import ClassNameGenerator from "@mui/utils/ClassNameGenerator";
 
 const Activitiy = () => {
+  const { toggleOn } = useContext(AlertContex);
   const { setTitle } = useContext(TitleContext);
-  const [Activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState([]);
   const { token } = useContext(AuthContext);
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
+  const getActivities = async (pangeNum) => {
+    const response = await UseFetch(
+      `${process.env.REACT_APP_API_GET_USER_ACTIVITIES}?page=${pangeNum}`,
+      "GET",
+      null,
+      { "content-Type": "application/json", authorization: `Bearer ${token}` }
+    );
+    
+    if (await response.success) {
+    console.log(response)
 
-  const getActivities = async () => {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaa");
-
-    const response = await fetch(`http://localhost:3002/api/v1/activities`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
-    });
-    const json = await response.json();
-    console.log("ssssssssssss", json);
-
-    if (json.success) {
-      setActivities(json.data);
-    console.log("ssssssssssss", json.data);
-
+      setActivities([...response.data.rows]);
+      setPageCount(response.data.pageCount);
+      toggleOn(response.messages, response.success);
     }
-    console.log("ssssssssssss", Activities);
   };
-
   useEffect(() => {
     setTitle("Admis Activities");
-    getActivities();
+    getActivities(page);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    getActivities(page);
+    // eslint-disable-next-line
+  }, [page]);
+
   return (
     <div className="flex flex-wrap -mx-3">
       <div className="flex-none w-full max-w-full px-3">
@@ -45,17 +52,11 @@ const Activitiy = () => {
               <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                 <thead className="align-bottom">
                   <tr>
+                    <th className="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                      Type
+                    </th>
                     <th className="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                      TIER
-                    </th>
-                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                      STANDARD POINTS
-                    </th>
-                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                      STANDARD POINTS
-                    </th>
-                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                      STANDARD POINTS
+                      MEMNERSHIP NUMBER
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       STANDARD POINTS
@@ -64,61 +65,54 @@ const Activitiy = () => {
                       TIERS POINTS
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                      MEMBERSHIP NUMBER
+                      BILL NUMBER
+                    </th>
+                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                      ACTIVITY DATE
                     </th>
                   </tr>
                 </thead>
 
-                {Activities?.map((Activitiy, i) => {
-                  return (
-                    <tbody>
-                      <tr>
-                        <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                          <p className="mb-0 font-semibold leading-tight text-xs">
-                            <div>{Activitiy?.memberId}</div>
-                          </p>
-                        </td>
-                        <td className="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
-                          <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{Activitiy?.type}</div>
-                          </span>
-                        </td>
-                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                          <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{Activitiy?.standardPoints}</div>
-                          </span>
-                        </td>
-                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                          <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{Activitiy?.tiresPoints}</div>
-                          </span>
-                        </td>
-                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                          <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{Activitiy?.billId}</div>
-                          </span>
-                        </td>
-                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                          <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{Activitiy?.createdAt}</div>
-                          </span>
-                        </td>
-                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                          <span className="font-semibold leading-tight text-xs text-slate-400">
-                            {" "}
-                            <a
-                              href="#"
-                              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                            >
-                              delete
-                            </a>
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  );
-                })}
+                <tbody>
+                  {activities?.map((activity, i) => (
+                    <tr key={i} className="hover:bg-slate-50 cursor-pointer">
+                      <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                        <p className="mb-0 font-semibold leading-tight text-xs">
+                          {activity?.type}
+                        </p>
+                      </td>
+                      <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                        <p className="mb-0 font-semibold leading-tight text-xs">
+                          {activity.Membership}
+                        </p>
+                      </td>
+                      <td className="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                        <span className="font-semibold leading-tight text-xs text-slate-400">
+                          {activity.standardPoints}
+                        </span>
+                      </td>
+                      <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                        <span className="font-semibold leading-tight text-xs text-slate-400">
+                          {activity.tiersPoints}
+                        </span>
+                      </td>
+                      <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                        <span className="font-semibold leading-tight text-xs text-slate-400">
+                          {/* {activity?.Bill?.billNumber==null ? "-" : activity.Bill.billNumber} */}
+                        </span>
+                      </td>
+                      <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                        <span className="font-semibold leading-tight text-xs text-slate-400">
+                          {activity.createdAt.substring(0, 10)}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
+              <div className="flex w-full flex-row justify-center mt-5 mb-2">
+                <PaginationBar pageCount={pageCount} setPage={setPage} />
+              </div>
             </div>
           </div>
         </div>

@@ -6,22 +6,22 @@ import { TitleContext } from "../../context/TitleContext";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import CompanyProfile from "../CompanyDashboard/components/CompanyProfile";
 import UserProfile from "../UserDashboard/components/UserProfile";
+import AdminsProfile from "../AdminDashboard/components/AdminsProfile";
 
 const Head = ({ setSidenavOpen, sidenavOpen }) => {
   const { logout } = useContext(AuthContext);
   const { title } = useContext(TitleContext);
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const [companyProfile, setCompanyProfile] = useState(false);
   const [userProfile, setUserProfile] = useState(false);
-
-
+  const [adminProfile, setAdminProfile] = useState(false);
 
   const handleClickOpen = () => {
     if (user.type === "company") setCompanyProfile(true);
     if (user.type === "user") setUserProfile(true);
+    if (user.type === "admin") setAdminProfile(true);
   };
-  
 
   const navigate = useNavigate();
   const logoutService = () => {
@@ -105,8 +105,18 @@ const Head = ({ setSidenavOpen, sidenavOpen }) => {
             </ul>
           </div>
         </div>
-        <CompanyProfile companyProfile={companyProfile} setCompanyProfile={setCompanyProfile} />
-        <UserProfile userProfile={userProfile} setUserProfile={setUserProfile} />
+        <CompanyProfile
+          companyProfile={companyProfile}
+          setCompanyProfile={setCompanyProfile}
+        />
+        <UserProfile
+          userProfile={userProfile}
+          setUserProfile={setUserProfile}
+        />
+        <AdminsProfile
+          adminProfile={adminProfile}
+          setAdminProfile={setAdminProfile}
+        />
       </nav>
     </>
   );

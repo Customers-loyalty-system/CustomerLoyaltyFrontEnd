@@ -13,7 +13,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import { AlertContex } from "../../../context/AlertContext";
 
 const Rules = () => {
-
   const { setTitle } = useContext(TitleContext);
   const [rules, setRules] = useState([]);
   const { token } = useContext(AuthContext);

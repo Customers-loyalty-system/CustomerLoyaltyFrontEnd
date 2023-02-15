@@ -10,26 +10,36 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import UseFetch from "../../../custom/UseFetch";
 import { useNavigate } from "react-router-dom";
 
-const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
-  const [companyDelete, setCompanyDelete] = useState(false);
+const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
+  const [adminDelete, setAdminDelete] = useState(false);
   const { token, user, setUser, login, logout } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
   const navigate = useNavigate();
-
-  const updateCompanyProfile = async (e) => {
+  const [content, setSendContent] = useState({
+    name:"",
+    email: "",
+    password: "",
+  });
+  
+  const updateAdminProfile = async (e) => {
     e.preventDefault();
+    console.log(content)
+
     const connect = await fetch(
-      `${process.env.REACT_APP_API_COMPANY_UPDATE}/${user.id}`,
+      `${process.env.REACT_APP_API_ADMIN_UPDATE}/${user.id}`,
       {
-        method: "PUT",
+        method: "POST",
         body: new FormData(e.target),
-        headers: { authorization: `Bearer ${token}` },
+        headers: {
+        authorization: `Bearer ${token}` },
       }
     );
     const response = await connect.json();
+    console.log(response)
+    console.log(response)
     if (await response.success) {
       setUser({ ...response.data });
-      login({ ...user, type: "company" }, token);
+      login({ ...user, type: "admin" }, token);
       toggleOn(response.messages, response.success);
       handleClose();
     } else {
@@ -38,18 +48,18 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
   };
 
   const handleClose = () => {
-    setCompanyProfile(false);
+    setAdminProfile(false);
   };
   const deleteProfile = async () => {
     const response = await UseFetch(
-      `${process.env.REACT_APP_API_COMPANY_DELETE}/${user.id}`,
+      `${process.env.REACT_APP_API_GET_DELETE_ADMIN}/${user.id}`,
       "DELETE",
       null,
       { authorization: `Bearer ${token}` }
     );
     if (response.success) {
       toggleOn(response.messages, response.success);
-      setCompanyDelete(false);
+      setAdminDelete(false);
       handleClose();
       logout();
       navigate('/')
@@ -60,15 +70,15 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
 
   return (
     <>
-      <Dialog open={companyProfile} onClose={handleClose}>
+      <Dialog open={adminProfile} onClose={handleClose}>
         <DialogTitle sx={{ fontSize: "21px", textAlign: "center" }}>
           <ManageAccountsIcon sx={{ fontSize: "28px" }} /> Update Profile
         </DialogTitle>
         <DialogContent sx={{ width: "450px" }}>
           <form
             action="#"
-            onSubmit={(e) => updateCompanyProfile(e)}
-            method="POST"
+            onSubmit={(e) => updateAdminProfile(e)}
+            method="PUT"
             className="mt-5 grid grid-cols-1 gap-y-6 gap-x-6 sm:grid-cols-2"
             id="updateForm"
           >
@@ -77,7 +87,7 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
                 htmlFor="name"
                 className="mb-1 block text-sm font-medium text-gray-700"
               >
-                Company Name
+                Admin Name
               </label>
               <input
                 id="name"
@@ -86,7 +96,12 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
                 value={user.name}
                 onChange={(e) => {
                   setUser({ ...user, name: e.target.value });
+                   setSendContent({
+                    ...content,
+                    name:e.target.value
+                  })
                 }}
+                
                 autoComplete="name"
                 required=""
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
@@ -106,52 +121,17 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
                 value={user.email}
                 onChange={(e) => {
                   setUser({ ...user, email: e.target.value });
+                  setSendContent({
+                    ...content,
+                    email:e.target.value
+                  })
                 }}
                 autoComplete="email"
                 required=""
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
               />
             </div>
-            <div className="col-span-full">
-              <label
-                htmlFor="phone"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Phone
-              </label>
-              <input
-                id="phone"
-                type="text"
-                name="phone"
-                value={user.phone}
-                onChange={(e) => {
-                  setUser({ ...user, phone: e.target.value });
-                }}
-                autoComplete="phone"
-                required=""
-                className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
-              />
-            </div>
-            <div className="col-span-full">
-              <label
-                htmlFor="website"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Website url
-              </label>
-              <input
-                id="website"
-                type="url"
-                name="website"
-                value={user.website}
-                onChange={(e) => {
-                  setUser({ ...user, website: e.target.value });
-                }}
-                autoComplete="website"
-                required=""
-                className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
-              />
-            </div>
+           
             <div className="col-span-full">
               <label
                 htmlFor="password"
@@ -164,53 +144,17 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
                 type="password"
                 name="password"
                 autoComplete="new-password"
-                required=""
-                className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
-              />
-            </div>
-            <div className="col-span-full">
-              <label
-                htmlFor="address"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Address
-              </label>
-              <input
-                id="address"
-                type="text"
-                name="address"
-                value={user.address}
-                onChange={(e) => {
-                  setUser({ ...user, address: e.target.value });
+                onChange={(e)=>{
+                    setSendContent({
+                        ...content,
+                        password:e.target.value
+                      })
                 }}
-                autoComplete="address"
                 required=""
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
               />
             </div>
-
-            <div className="col-span-full">
-              <label
-                htmlFor="logo"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Logo
-              </label>
-              <input
-                id="logo"
-                type="file"
-                name="logo"
-                autoComplete="logo"
-                required=""
-
-                className="block w-full text-sm text-slate-500
-            file:mr-4 file:py-2 file:px-4
-            file:rounded-full file:border-0
-            file:text-sm file:font-semibold
-            file:bg-gray-50 file:text-gray-700
-            hover:file:bg-gray-100"
-              />
-            </div>
+            
           </form>
         </DialogContent>
         <DialogActions>
@@ -223,9 +167,12 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
               "&:hover": {
                 backgroundColor: "#ef4444",
               },
-            }} onClick={() => setCompanyDelete(true)}>
-            DETELTE YOUR ACCOUNT
+            }}
+            onClick={() => setAdminDelete(true)}
+          >
+            DELETE YOUR ACCOUNT
           </Button>
+
           <Button sx={{ color: "#334155" }} onClick={handleClose}>
             Cancel
           </Button>
@@ -236,8 +183,8 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
       </Dialog>
 
       <Dialog
-        open={companyDelete}
-        onClose={() => setCompanyDelete(false)}
+        open={adminDelete}
+        onClose={() => setAdminDelete(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -246,7 +193,7 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
         </DialogTitle>
         <DialogActions>
           <Button
-            onClick={() => setCompanyDelete(false)}
+            onClick={() => setAdminDelete(false)}
             sx={{ color: "#334155" }}
             autoFocus
           >
@@ -261,4 +208,4 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
   );
 };
 
-export default CompanyProfile;
+export default AdminsProfile;
