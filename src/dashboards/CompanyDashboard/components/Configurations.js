@@ -103,14 +103,14 @@ const Configurations = () => {
           <div className="absolute right-20">
             <button
               onClick={() => setCreateTierConfiguration(true)}
-              className={`flex-none bg-gradient-to-tl from-blue-500 to-blue-300 leading-tight text-x bold border-2 rounded-full  
+              className={`flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  
             shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 mx-3 `}
             >
               Tier Configurations
             </button>
             <button
               onClick={() => setCreateStandardConfiguration(true)}
-              className={`flex-none bg-gradient-to-tl from-blue-500 to-blue-300 leading-tight text-x bold border-2 rounded-full  
+              className={`flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  
               shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400`}
             >
               Redemption Configurations

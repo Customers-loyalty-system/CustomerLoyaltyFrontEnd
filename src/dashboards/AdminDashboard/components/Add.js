@@ -1,96 +1,112 @@
-import { useContext, useEffect, useRef } from "react";
-import { TitleContext } from "../../../context/TitleContext";
+import { useContext,  useRef } from "react";
 import { AuthContext } from "../../../context/AuthContext";
-const Add = () => {
-  const { setTitle } = useContext(TitleContext);
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import UseFetch from "../../../custom/UseFetch";
+import { AlertContex } from "../../../context/AlertContext";
+
+const Add = ({ addAdmin, setAddAdmin, setAdmins }) => {
   const { token } = useContext(AuthContext);
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
+  const { toggleOn } = useContext(AlertContex);
 
-  const addAdmin = async (e) => {
-    const name = nameRef.current.value;
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    
-    const response = await fetch(
-      `${process.env.REACT_APP_API_ADMIN_REGISTER}`,
+  const addNewAdmin = async (e) => {
+    const response = await UseFetch(
+      process.env.REACT_APP_API_ADMIN_REGISTER,
+      "POST",
       {
-        method: "POST",
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          password: password,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        
-         
-        },
-      
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      },
+      {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       }
     );
-    const json = await response.json();
-    console.log(json)
-    if (json.success) alert(json.messages);
+    if (response.success) {
+      toggleOn(response.messages, response.success);
+      setAddAdmin(false)
+      setAdmins((pre)=> [response.data, ...pre ])
+    } else {
+      toggleOn(response.messages, response.success);
+    }
   };
 
-  useEffect(() => {
-  setTitle("Add new admin");
-    // eslint-disable-next-line
-  }, []);
   return (
     <>
-      <div class="w-1/2 bg-white rounded shadow-2xl p-8 m-4">
-        <h4 class="block w-full text-center text-gray-800 text-2xl font-bold mb-3">
-          Add new Admin
-        </h4>
-       
-          <div class="flex flex-col mb-4">
+      <Dialog open={addAdmin} onClose={() => setAddAdmin(false)}>
+        <DialogTitle sx={{ fontSize: "21px", textAlign: "center" }}>
+          Add New Admin
+        </DialogTitle>
+        <DialogContent sx={{ width: "450px" }}>
+          <div className="col-span-full">
             <label
-              class="mb-2 font-bold text-lg text-gray-900"
-              for="first_name"
+              htmlFor="name"
+              className="mb-1 block text-sm font-medium text-gray-700"
             >
-              Name
+              Admin Name
             </label>
             <input
-              ref={nameRef}
-              class="border py-2 px-3 text-neutral-900"
-              type="text"
-              name="name"
               id="name"
+              type="name"
+              name="name"
+              ref={nameRef}
+              autoComplete="name"
+              required=""
+              className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
             />
           </div>
-          <div class="flex flex-col mb-4">
-            <label class="mb-2 font-bold text-lg text-gray-900" for="email">
-              Email
+          <div className="col-span-full">
+            <label
+              htmlFor="email"
+              className="mb-1 block text-sm font-medium text-gray-700"
+            >
+              Email address
             </label>
             <input
-            ref={emailRef}
-              class="border py-2 px-3  text-neutral-900"
+              id="email"
               type="email"
               name="email"
-              id="email"
+              ref={emailRef}
+              autoComplete="email"
+              required=""
+              className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
             />
           </div>
-          <div class="flex flex-col mb-4">
-            <label class="mb-2 font-bold text-lg text-gray-900" for="password">
-              Password
+
+          <div className="col-span-full">
+            <label
+              htmlFor="password"
+              className="mb-1 block text-sm font-medium text-gray-700"
+            >
+              New Password
             </label>
             <input
-            ref={passwordRef}
-              class="border py-2 px-3  text-neutral-900"
+              id="password"
               type="password"
               name="password"
-              id="password"
+              ref={passwordRef}
+              autoComplete="new-password"
+              required=""
+              className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
             />
           </div>
-        
-          
-          <button onClick={()=>addAdmin()}  class="ml-32 mt-3 h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-          Create admin</button>
-      </div>
+        </DialogContent>
+        <DialogActions>
+          <Button sx={{ color: "#334155" }} onClick={() => setAddAdmin(false)}>
+            Cancel
+          </Button>
+          <Button onClick={addNewAdmin} sx={{ color: "#334155" }}>
+            Add Admin
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

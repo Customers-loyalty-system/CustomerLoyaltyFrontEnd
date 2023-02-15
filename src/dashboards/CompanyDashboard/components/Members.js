@@ -106,7 +106,7 @@ const Members = () => {
                               </div>
                             </div>
                           </td>
-                          <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <td className="p-2 align-middle text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <p className="mb-0 font-semibold leading-tight text-xs">
                               {member.membershipTier}
                             </p>

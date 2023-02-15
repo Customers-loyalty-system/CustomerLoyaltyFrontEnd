@@ -3,7 +3,6 @@ import React, { Suspense} from "react";
 import { Route, Routes } from "react-router-dom";
 import Notification from "./components/Notifications/Notifications";
 import Login from "./pages/Login/Login"
-import MemberRelation from "./dashboards/AdminDashboard/components/MemberRelation";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const UserRegistration = React.lazy(() =>
@@ -19,9 +18,7 @@ const User = React.lazy(() =>
   import("./dashboards/UserDashboard/UserDashboard")
 );
 const Admin = React.lazy(()=> import( "./dashboards/AdminDashboard/AdminDashboard"))
-const Add = React.lazy(()=> import( "./dashboards/AdminDashboard/components/Add"))
 const List = React.lazy(()=> import( "./dashboards/AdminDashboard/components/List"))
-const Update = React.lazy(()=> import( "./dashboards/AdminDashboard/components/Update"))
 const Memberships = React.lazy(()=> import( "./dashboards/UserDashboard/components/Memberships"))
 const UserActivities = React.lazy(()=> import( "./dashboards/UserDashboard/components/UserActivities"))
 const UserRelations = React.lazy(()=> import( "./dashboards/UserDashboard/components/UserRelations"))
@@ -32,8 +29,9 @@ const MembersActivity = React.lazy(()=> import( "./dashboards/CompanyDashboard/c
 const Rules = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Rules"))
 const Configurations = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/Configurations"))
 const Gifts = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/MembersGifts"))
-const MembersRelations = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/MemberRelations"))
-
+const CompanyMembersRelations = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/MemberRelations"))
+const AdminMembersRelations = React.lazy(()=> import( "./dashboards/AdminDashboard/components/MemberRelation"))
+const AdminMembers = React.lazy(()=> import( "./dashboards/AdminDashboard/components/AdminMembers"))
 
 
 
@@ -52,7 +50,7 @@ const App = () => {
           <Route path="rules" element={<Suspense> <Rules/></Suspense>}/>
           <Route path="configurations" element={<Suspense><Configurations/></Suspense>}/>
           <Route path="gifts" element={<Suspense><Gifts /></Suspense>}/>
-          <Route path="relations" element={<Suspense><MembersRelations /></Suspense>}/>
+          <Route path="relations" element={<Suspense><CompanyMembersRelations /></Suspense>}/>
 
         </Route>
 
@@ -63,12 +61,12 @@ const App = () => {
         </Route>
 
         <Route path="admin/" element={<Suspense><Admin /></Suspense>} > 
-          <Route path="" element={<Suspense><Add /> </Suspense>} /> 
           <Route path="list" element={<Suspense><List /></Suspense>} /> 
-          <Route path="Update" element={<Suspense><Update /></Suspense>} /> 
           <Route path="activities" element={<Suspense><Activitiy /></Suspense>} /> 
-          <Route path="addbill" element={<Suspense><AddBill /></Suspense>} /> 
-          <Route path="memberrelation" element={<Suspense><MemberRelation /></Suspense>} /> 
+          <Route path="" element={<Suspense><AddBill /></Suspense>} /> 
+          <Route path="relations" element={<Suspense><AdminMembersRelations /></Suspense>} /> 
+          <Route path="members" element={<Suspense><AdminMembers /></Suspense>} /> 
+
         </Route>
       </Routes>
       <Notification />
