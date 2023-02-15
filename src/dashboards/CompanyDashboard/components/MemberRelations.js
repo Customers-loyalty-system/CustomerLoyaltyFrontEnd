@@ -1,51 +1,57 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useContext, useState } from "react";
+import { AlertContex } from "../../../context/AlertContext";
 import { AuthContext } from "../../../context/AuthContext";
 import { TitleContext } from "../../../context/TitleContext";
 import UseFetch from "../../../custom/UseFetch";
-import { AlertContex } from "../../../context/AlertContext";
 import PaginationBar from "../../PaginationBar/PaginationBar";
 
-const Members = () => {
+const MembersRelations = () => {
+  const [membersRelations, setMembersRelation] = useState([]);
   const { token } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
   const { setTitle } = useContext(TitleContext);
-  const [members, setMembers] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
 
-  const getMembers = async (page) => {
+  const getMembersRelations = async (page) => {
     const response = await UseFetch(
-      `${process.env.REACT_APP_API_GET_COMPANY_MEMBERS}?page=${page}`,
+      `${process.env.REACT_APP_API_COMPANY_MEMBERS_RELATION}?page=${page}`,
       "GET",
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    if ((await response.data.members.length) > 0) {
-      setMembers([...response.data.members]);
-      setPageCount(response.data.pageCount)
+    console.log(response);
+    if ((await response.data.relations.length) > 0) {
+      setMembersRelation([...response.data.relations]);
       toggleOn(response.messages, response.success);
+      setPageCount(response.data.pageCount);
     } else {
-      toggleOn("You do not have any members yet", false);
+      toggleOn(
+        "Your company doesn't have any relations between the members yet. ",
+        response.success
+      );
     }
   };
+
   useEffect(() => {
-    setTitle("Company Members");
-    getMembers(page);
+    setTitle("Members Relations");
+    getMembersRelations(page);
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    getMembers(page);
+    getMembersRelations(page);
     // eslint-disable-next-line
   }, [page]);
 
   return (
     <>
-      {members.length === 0 ? (
+      {membersRelations.length === 0 ? (
         <div className="flex flex-wrap -mx-3">
           <div className="flex-none w-full max-w-full px-3">
             <div className="relative flex flex-col min-w-0 mb-8 text-center mt-10">
-              Your company doesn't have any members yet.
+              Your company doesn't have any relations between the members yet.
             </div>
           </div>
         </div>
@@ -54,7 +60,7 @@ const Members = () => {
           <div className="flex-none w-full max-w-full px-3">
             <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
               <div className="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                <h6>Members Table</h6>
+                <h6>Members Relations Table</h6>
               </div>
               <div className="flex-auto px-0 pt-0 pb-2">
                 <div className="p-0 overflow-x-auto">
@@ -62,76 +68,105 @@ const Members = () => {
                     <thead className="align-bottom">
                       <tr>
                         <th className="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                          MEMBER
+                          First member
                         </th>
                         <th className="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                          TIER
+                          Second member
                         </th>
                         <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                          STANDARD POINTS
+                          Relation Type
                         </th>
                         <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                          TIERS POINTS
-                        </th>
-                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                          MEMBERSHIP NUMBER
-                        </th>
-                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                          MEMBERSHIP DATE
+                          RElation start DATE
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {members.map((member, i) => (
-                        <tr key={i} className='hover:bg-slate-50 cursor-pointer'>
+                      {membersRelations.map((relations, i) => (
+                        <tr
+                          key={i}
+                          className="hover:bg-slate-50 cursor-pointer"
+                        >
                           <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <div className="flex px-2 py-1">
                               <div>
                                 <img
-                                  src={member.User.avatar}
+                                  src={relations.firstMember.User.avatar}
                                   className="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
                                   alt="user1"
                                 />
                               </div>
                               <div className="flex flex-col justify-center">
                                 <h6 className="mb-1 leading-normal text-sm">
-                                  {member.User.name} {member.User.surname}
+                                  {relations.firstMember.User.name}{" "}
+                                  {relations.firstMember.User.surname}
                                 </h6>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  {member.User.email}
+                                  {relations.firstMember.User.email}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  {member.User.phone}
+                                  {relations.firstMember.membershipNumber}
+                                </p>{" "}
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  Current Tier: {relations.firstMember.membershipTier}
+                                </p>
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  Standard Points:{" "}
+                                  {relations.firstMember.standardPoints}
+                                </p>
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  Teirs Points:{" "}
+                                  {relations.firstMember.tiersPoints}
                                 </p>
                               </div>
                             </div>
                           </td>
                           <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <p className="mb-0 font-semibold leading-tight text-xs">
-                              {member.membershipTier}
-                            </p>
+                            <div className="flex px-2 py-1">
+                              <div>
+                                <img
+                                  src={relations.secondMember.User.avatar}
+                                  className="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
+                                  alt="user1"
+                                />
+                              </div>
+                              <div className="flex flex-col justify-center">
+                                <h6 className="mb-1 leading-normal text-sm">
+                                  {relations.secondMember.User.name}{" "}
+                                  {relations.secondMember.User.surname}
+                                </h6>
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  {relations.secondMember.User.email}
+                                </p>
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  {relations.secondMember.membershipNumber}
+                                </p>{" "}
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  Current Tier: {relations.secondMember.membershipTier}
+                                </p>
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  Standard Points:{" "}
+                                  {relations.secondMember.standardPoints}
+                                </p>
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  Teirs Points:{" "}
+                                  {relations.secondMember.tiersPoints}
+                                </p>
+                              </div>
+                            </div>
                           </td>
-                          <td className="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
+                          <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <span className="font-semibold leading-tight text-xs text-slate-400">
-                              {member.tiersPoints}
+                              {relations.type}
                             </span>
                           </td>
                           <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <span className="font-semibold leading-tight text-xs text-slate-400">
-                              {member.standardPoints}
-                            </span>
-                          </td>
-                          <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span className="font-semibold leading-tight text-xs text-slate-400">
-                              {member.membershipNumber}
-                            </span>
-                          </td>
-                          <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                            <span className="font-semibold leading-tight text-xs text-slate-400">
-                              {member.createdAt.substring(0, 10)}
+                              {relations.createdAt.substring(0, 10)}
                             </span>
                           </td>
                         </tr>
+                        
                       ))}
                     </tbody>
                   </table>
@@ -148,4 +183,4 @@ const Members = () => {
   );
 };
 
-export default Members;
+export default MembersRelations;

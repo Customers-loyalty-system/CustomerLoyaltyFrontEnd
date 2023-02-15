@@ -9,10 +9,9 @@ import CompanyProfile from "../CompanyDashboard/components/CompanyProfile";
 const Head = ({ setSidenavOpen, sidenavOpen }) => {
   const { logout } = useContext(AuthContext);
   const { title } = useContext(TitleContext);
-  const {  user} = useContext(AuthContext);
+  const { user} = useContext(AuthContext);
 
   const [companyProfile, setCompanyProfile] = useState(false);
-
 
   const handleClickOpen = () => {
     if (user.type === "company") setCompanyProfile(true);

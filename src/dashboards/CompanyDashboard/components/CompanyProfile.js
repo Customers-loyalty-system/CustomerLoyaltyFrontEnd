@@ -222,12 +222,9 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
               "&:hover": {
                 backgroundColor: "#ef4444",
               },
-            }}
-            onClick={() => setCompanyDelete(true)}
-          >
+            }} onClick={() => setCompanyDelete(true)}>
             DETELTE YOUR ACCOUNT
           </Button>
-
           <Button sx={{ color: "#334155" }} onClick={handleClose}>
             Cancel
           </Button>

@@ -12,6 +12,7 @@ const MembersActivity = () => {
   const [page, setPage] = useState(1);
   const [activities, setActivities] = useState([]);
   const [pageCount, setPageCount] = useState(0);
+  
   const getActivity = async (pangeNum) => {
     const activities = await UseFetch(
       `${process.env.REACT_APP_API_GET_ACTIVITIES}?page=${pangeNum}`,
