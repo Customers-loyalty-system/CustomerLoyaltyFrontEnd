@@ -29,9 +29,8 @@ const Login = () => {
       }
       if (types.includes("user")) {
         authCtx.login({ ...user.data.user, type: "user" }, user.data.token);
-      setTimeout(()=>{
-          nvaigate("/user/");
-      },3000)
+        nvaigate("/user/");
+ 
       }
       if (types.includes("company")) {
         authCtx.login(

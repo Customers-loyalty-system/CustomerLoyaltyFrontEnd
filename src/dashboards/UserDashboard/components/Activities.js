@@ -14,8 +14,6 @@ export const Activities = ({ company, openActivities, setOpenActivities }) => {
   const [activites, setActivities] = useState([]);
   const { token } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
-  const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(0);
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
       padding: theme.spacing(2),
@@ -26,24 +24,21 @@ export const Activities = ({ company, openActivities, setOpenActivities }) => {
   }));
   const getActivities = async (pageNum) => {
     const response = await UseFetch(
-      `${process.env.REACT_APP_API_GET_ACTIVITIES}?companyId=${company.id}&page=${pageNum}`,
+      `${process.env.REACT_APP_API_GET_ACTIVITIES}?companyId=${company.id}`,
       "GET",
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    toggleOn(response.messages, response.success);
     if (await response.success) {
-      setPageCount(response.data.pageCount);
+    toggleOn(response.messages, response.success);
       setActivities([...response.data.rows]);
-    } else {
-      toggleOn(response.messages, response.success);
-    }
+  } else toggleOn(response.messages, response.success);
   };
 
   useEffect(() => {
-    getActivities(page);
+    getActivities();
     // eslint-disable-next-line
-  }, [page]);
+  }, []);
 
   return (
     <>
@@ -66,7 +61,7 @@ export const Activities = ({ company, openActivities, setOpenActivities }) => {
             <div className="flex flex-wrap -mx-3 overflow-x-hidden ">
               <div className="flex-none w-full max-w-full px-3">
                 <div className="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                  <h6>Activites</h6>
+                  <h6>Latest activities</h6>
                 </div>
                 <div className="flex-auto px-0 pt-0 pb-2">
                   <div className="p-0 overflow-x-hidden lg:overflow-x-hidden">
@@ -115,20 +110,26 @@ export const Activities = ({ company, openActivities, setOpenActivities }) => {
               </div>
             </div>
           </DialogContent>
-          <div className="flex justify-center">
-          <PaginationBar pageCount={pageCount} setPage={setPage} />
-          </div>
           <DialogActions
             sx={{
               margin: "0px",
             }}
           >
             <Button
-              variant="contained"
-              onClick={() => setOpenActivities(false)}
-            >
-              close
-            </Button>
+                size={"small"}
+                variant="contained"
+                sx={{
+                  borderRadius: 5,
+                  outline: "none",
+                  border: "none",
+                  stroke: "none",
+                  margin:'5px 0 5px',
+                  "&:hover": { backgroundColor: "#1976d2" },
+                }}
+                onClick={() => setOpenActivities(false)}
+              >
+                close
+              </Button>
           </DialogActions>
         </BootstrapDialog>
       ) : (

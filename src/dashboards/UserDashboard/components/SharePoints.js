@@ -63,7 +63,7 @@ const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
                 id="phone"
                 type="text"
                 name="phone"
-                fullWidth
+
                 onChange={(e) => {
                   setInputValue({
                     ...inputValue,
@@ -83,17 +83,15 @@ const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
                 Points
               </label>
               <input
-                id="phone"
+                id="points"
                 type="number"
-                name="phone"
-                fullWidth
+                name="points"
                 onChange={(e) => {
                   setInputValue({
                     ...inputValue,
-                    Points: e.target.value,
+                    points: e.target.value,
                   });
                 }}
-                autoComplete="phone"
                 required=""
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
               />
@@ -108,7 +106,6 @@ const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
               <select
                 id="type"
                 name="tier"
-                fullWidth
                 onChange={(e) => {
                   setInputValue({
                     ...inputValue,
@@ -117,6 +114,7 @@ const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
                 }}
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
               >
+                <option value={"choose"}>--Please choose an option--</option>
                 <option value={'Tiers points'}>Tiers points</option>
                 <option value={'Standard points'}>Standard points</option>
               </select>
@@ -128,6 +126,7 @@ const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
                 size={"small"}
                 variant="contained"
                 sx={{
+                  borderRadius: 5,
                   outline: "none",
                   border: "none",
                   stroke: "none",
@@ -145,6 +144,7 @@ const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
                 size={"small"}
                 variant="contained"
                 sx={{
+                  borderRadius: 5,
                   outline: "none",
                   border: "none",
                   stroke: "none",
@@ -157,7 +157,7 @@ const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
                   sharePoints();
                 }}
               >
-                Add
+                Share
               </Button>
             </Box>
           </DialogActions>

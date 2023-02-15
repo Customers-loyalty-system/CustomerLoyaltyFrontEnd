@@ -31,7 +31,15 @@ const Memberships = () => {
 
   return (
     <>
-      {memberships.length > 0 ? (
+      {memberships?.length === 0 ? (
+        <div
+          className={
+            "flex flex-col justify-items-center items-center content-center font-bold italic"
+          }
+        >
+          YOU HAVE NO MEMBERSHIPS YET
+        </div>
+      ) : (
         <div className="w-full flex-wrap -mx-3  ">
           <div className=" w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-6">
             {memberships?.map((membership, i) => (
@@ -44,14 +52,6 @@ const Memberships = () => {
             ))}
           </div>
         </div>
-      ) : (
-        <di
-          className={
-            "flex flex-col uppercase justify-items-center items-center content-center font-bold italic"
-          }
-        >
-          YOU HAVE NO MEMBERSHIPS YET
-        </di>
       )}
     </>
   );

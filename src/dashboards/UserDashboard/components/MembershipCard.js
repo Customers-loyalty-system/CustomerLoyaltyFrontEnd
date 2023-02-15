@@ -41,14 +41,14 @@ const MembershipCard = ({ membership, memberships, setMemberships }) => {
     if (memberships.length === 0) toggleOn("YOU HAVE NO MEMBERSHIPS YET", false ); 
   };
   return (
-    <div className="relative flex flex-col items-center shadow-soft-xl rounded-2xl bg-clip-border w-full bg-white ">
-      <div className="relative w-full flex flex-row mb-1 mt-3  ">
+    <div key={membership.id} className="relative flex flex-col items-center shadow-soft-xl rounded-2xl bg-clip-border w-full bg-white ">
+      <div className="relative w-full flex flex-row mb-1 mt-3 items-center  ">
         <img
           alt="company logo"
           src={membership.company.logo}
           className="w-8 h-8 ml-5 object-cover border mr-3 rounded-full "
         />
-        <h6 className="text-center font-light text-black capitalize ">
+        <h6 className="text-center font-semibold text-black capitalize ">
           {membership.company.name}
         </h6>
       </div>
@@ -94,7 +94,6 @@ const MembershipCard = ({ membership, memberships, setMemberships }) => {
             </Button>
           </DialogActions>
         </Dialog>
-
         <div className=" flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer  bg-center items-center justify-center p-2  ">
           <ReceiptLongIcon
             onClick={() => {
@@ -113,7 +112,7 @@ const MembershipCard = ({ membership, memberships, setMemberships }) => {
         <div className=" flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer  bg-center items-center justify-center p-2  ">
           <GroupAddIcon
             onClick={() => {
-              if (!openActivities) {
+              if (!openAddRelation) {
                 setOpenAddRelation(true);
               } else {
                 setOpenAddRelation(false);

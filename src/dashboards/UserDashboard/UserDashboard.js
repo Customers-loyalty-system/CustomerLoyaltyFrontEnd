@@ -4,6 +4,9 @@ import Sidenav from "../Sidenav/Sidenav";
 import Head from "../Head/Head";
 import { Outlet } from "react-router-dom";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+
 const UserDashboard = (props) => {
   const { token, user, logout } = useContext(AuthContext);
 
@@ -35,7 +38,7 @@ const UserDashboard = (props) => {
       target: "/user/activities",
       text: "Activities",
       icon: (
-        <CardMembershipIcon
+        <ReceiptLongIcon
           sx={{ color: "white", width: "15px", height: "15px" }}
         />
       ),
@@ -44,7 +47,7 @@ const UserDashboard = (props) => {
       target: "/user/relations",
       text: "Relations",
       icon: (
-        <CardMembershipIcon
+        <GroupAddIcon
           sx={{ color: "white", width: "15px", height: "15px" }}
         />
       ),
