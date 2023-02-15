@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import { TitleContext } from "../../../context/TitleContext";
+<<<<<<< HEAD
 import {  Modal,   } from "antd";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -9,6 +10,8 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+=======
+>>>>>>> 118cf3b39055844a8cf5714131a343aeb741f879
 const List = () => {
   const { setTitle } = useContext(TitleContext);
   const [admins, setAdmins] = useState([]);

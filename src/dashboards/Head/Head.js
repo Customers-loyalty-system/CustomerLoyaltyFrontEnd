@@ -10,11 +10,10 @@ import AdminsProfile from "../AdminDashboard/components/AdminsProfile";
 const Head = ({ setSidenavOpen, sidenavOpen }) => {
   const { logout } = useContext(AuthContext);
   const { title } = useContext(TitleContext);
-  const {  user} = useContext(AuthContext);
+  const { user} = useContext(AuthContext);
 
   const [companyProfile, setCompanyProfile] = useState(false);
   const [adminProfile, setAdminProfile] = useState(false);
-
 
   const handleClickOpen = () => {
     if (user.type === "company") setCompanyProfile(true);

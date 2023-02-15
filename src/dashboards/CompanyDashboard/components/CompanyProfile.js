@@ -202,6 +202,7 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
                 name="logo"
                 autoComplete="logo"
                 required=""
+
                 className="block w-full text-sm text-slate-500
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
@@ -222,12 +223,9 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
               "&:hover": {
                 backgroundColor: "#ef4444",
               },
-            }}
-            onClick={() => setCompanyDelete(true)}
-          >
+            }} onClick={() => setCompanyDelete(true)}>
             DETELTE YOUR ACCOUNT
           </Button>
-
           <Button sx={{ color: "#334155" }} onClick={handleClose}>
             Cancel
           </Button>

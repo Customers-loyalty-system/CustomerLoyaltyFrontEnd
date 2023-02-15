@@ -7,6 +7,8 @@ import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import ReorderIcon from '@mui/icons-material/Reorder';
 import TuneIcon from '@mui/icons-material/Tune';
 import SettingsInputCompositeIcon from '@mui/icons-material/SettingsInputComposite';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const CompanyDashboard = (props) => {
   const { token, user, logout } = useContext(AuthContext);
@@ -54,7 +56,20 @@ const CompanyDashboard = (props) => {
         <SettingsInputCompositeIcon sx={{ color: "white", width: "18px", height: "18px" }} />
       ),
     },
-
+    {
+      target: "/company/gifts",
+      text: "Members Gifts",
+      icon: (
+        <CardGiftcardIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+      ),
+    },
+    {
+      target: "/company/relations",
+      text: "Members Relations",
+      icon: (
+        <ListAltIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+      ),
+    },
   ];
   return (
     <>
@@ -65,7 +80,7 @@ const CompanyDashboard = (props) => {
         }}
       >
         <Sidenav links={links} sidenavOpen={sidenavOpen} />
-        <main className="ease-soft-in-out xl:ml-68.5 relative h-full  rounded-xl transition-all duration-200">
+        <main className="ease-soft-in-out xl:ml-68.5 relative h-full rounded-xl transition-all duration-200">
           <Head
             title={props.title}
             sidenavOpen={sidenavOpen}
