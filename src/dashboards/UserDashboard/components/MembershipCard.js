@@ -48,7 +48,7 @@ const MembershipCard = ({ membership, memberships, setMemberships }) => {
           src={membership.company.logo}
           className="w-8 h-8 ml-5 object-cover border mr-3 rounded-full "
         />
-        <h6 className="text-center font-bold text-black capitalize ">
+        <h6 className="text-center font-light text-black capitalize ">
           {membership.company.name}
         </h6>
       </div>
