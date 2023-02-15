@@ -4,7 +4,6 @@ import { TitleContext } from "../../../context/TitleContext";
 import UseFetch from "../../../custom/UseFetch";
 import PaginationBar from "../../PaginationBar/PaginationBar";
 import { AlertContex } from "../../../context/AlertContext";
-import ClassNameGenerator from "@mui/utils/ClassNameGenerator";
 
 const Activitiy = () => {
   const { toggleOn } = useContext(AlertContex);
@@ -22,8 +21,6 @@ const Activitiy = () => {
     );
     
     if (await response.success) {
-    console.log(response)
-
       setActivities([...response.data.rows]);
       setPageCount(response.data.pageCount);
       toggleOn(response.messages, response.success);
@@ -83,7 +80,7 @@ const Activitiy = () => {
                       </td>
                       <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <p className="mb-0 font-semibold leading-tight text-xs">
-                          {activity.Membership}
+                          {activity.Membership.membershipNumber}
                         </p>
                       </td>
                       <td className="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
@@ -98,7 +95,7 @@ const Activitiy = () => {
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <span className="font-semibold leading-tight text-xs text-slate-400">
-                          {/* {activity?.Bill?.billNumber==null ? "-" : activity.Bill.billNumber} */}
+                          {activity?.Bill?.billNumber==null ? "-" : activity.Bill.billNumber}
                         </span>
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">

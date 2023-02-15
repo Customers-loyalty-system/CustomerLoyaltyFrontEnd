@@ -77,7 +77,10 @@ const MembersRelations = () => {
                           Relation Type
                         </th>
                         <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                          RElation start DATE
+                          Company Name
+                        </th>
+                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                          Relation start DATE
                         </th>
                       </tr>
                     </thead>
@@ -108,7 +111,8 @@ const MembersRelations = () => {
                                   {relations.firstMember.membershipNumber}
                                 </p>{" "}
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  Current Tier: {relations.firstMember.membershipTier}
+                                  Current Tier:{" "}
+                                  {relations.firstMember.membershipTier}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
                                   Standard Points:{" "}
@@ -142,7 +146,8 @@ const MembersRelations = () => {
                                   {relations.secondMember.membershipNumber}
                                 </p>{" "}
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  Current Tier: {relations.secondMember.membershipTier}
+                                  Current Tier:{" "}
+                                  {relations.secondMember.membershipTier}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
                                   Standard Points:{" "}
@@ -161,12 +166,16 @@ const MembersRelations = () => {
                             </span>
                           </td>
                           <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <span className="font-semibold leading-tight capitalize text-xs text-slate-400">
+                              {relations.Company.name}
+                            </span>
+                          </td>
+                          <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <span className="font-semibold leading-tight text-xs text-slate-400">
                               {relations.createdAt.substring(0, 10)}
                             </span>
                           </td>
                         </tr>
-                        
                       ))}
                     </tbody>
                   </table>

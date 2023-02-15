@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext,  useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -15,28 +15,29 @@ const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
   const { token, user, setUser, login, logout } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
   const navigate = useNavigate();
-  const [content, setSendContent] = useState({
-    name:"",
-    email: "",
-    password: "",
-  });
-  
+
+  const handleClose = () => {
+    setAdminProfile(false);
+  };
+
   const updateAdminProfile = async (e) => {
     e.preventDefault();
-    console.log(content)
-
     const connect = await fetch(
       `${process.env.REACT_APP_API_ADMIN_UPDATE}/${user.id}`,
       {
-        method: "POST",
-        body: new FormData(e.target),
+        method: "PUT",
+        body: JSON.stringify({
+          name: user.name,
+          email: user.email,
+          password: user.password,
+        }),
         headers: {
-        authorization: `Bearer ${token}` },
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
       }
     );
     const response = await connect.json();
-    console.log(response)
-    console.log(response)
     if (await response.success) {
       setUser({ ...response.data });
       login({ ...user, type: "admin" }, token);
@@ -47,9 +48,6 @@ const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
     }
   };
 
-  const handleClose = () => {
-    setAdminProfile(false);
-  };
   const deleteProfile = async () => {
     const response = await UseFetch(
       `${process.env.REACT_APP_API_GET_DELETE_ADMIN}/${user.id}`,
@@ -62,7 +60,7 @@ const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
       setAdminDelete(false);
       handleClose();
       logout();
-      navigate('/')
+      navigate("/");
     } else {
       toggleOn(response.messages, response.success);
     }
@@ -96,12 +94,7 @@ const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
                 value={user.name}
                 onChange={(e) => {
                   setUser({ ...user, name: e.target.value });
-                   setSendContent({
-                    ...content,
-                    name:e.target.value
-                  })
                 }}
-                
                 autoComplete="name"
                 required=""
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
@@ -121,17 +114,13 @@ const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
                 value={user.email}
                 onChange={(e) => {
                   setUser({ ...user, email: e.target.value });
-                  setSendContent({
-                    ...content,
-                    email:e.target.value
-                  })
                 }}
                 autoComplete="email"
                 required=""
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
               />
             </div>
-           
+
             <div className="col-span-full">
               <label
                 htmlFor="password"
@@ -144,17 +133,16 @@ const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
                 type="password"
                 name="password"
                 autoComplete="new-password"
-                onChange={(e)=>{
-                    setSendContent({
-                        ...content,
-                        password:e.target.value
-                      })
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    password: e.target.value,
+                  });
                 }}
                 required=""
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
               />
             </div>
-            
           </form>
         </DialogContent>
         <DialogActions>

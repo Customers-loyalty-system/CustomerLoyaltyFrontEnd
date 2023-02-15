@@ -102,9 +102,9 @@ const Rules = () => {
           <div className="flex-none w-full max-w-full px-3">
             <button
               onClick={() => setCreateRule(true)}
-              className="absolute right-20 flex-none bg-gradient-to-tl from-blue-500 to-blue-300 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
+              className="absolute right-40 flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
             >
-              Create Rule
+              Create New Rule
             </button>
             <div className="relative flex flex-col min-w-0 mb-8 text-center mt-10">
               Your company doesn't have any rule yet. Please press on the create
@@ -117,9 +117,9 @@ const Rules = () => {
           <div className="flex-none w-full max-w-full px-3">
             <button
               onClick={() => setCreateRule(true)}
-              className="absolute right-28 flex-none bg-gradient-to-tl from-blue-500 to-blue-300 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
+              className="absolute right-40 flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
             >
-              Create Rule
+              Create New Rule
             </button>
             <div className="mt-12">
               {rules.map((rule, i) => (

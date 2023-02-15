@@ -84,7 +84,7 @@ const MembersGifts = () => {
               />
             </div>
             <button
-              className={` my-5 w-1/2 bg-gradient-to-tl from-blue-500 to-blue-300 leading-tight text-x 
+              className={` my-5 w-1/2 bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x 
               bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl 
               hover:from-blue-600 hover:to-blue-400`}
               onClick={exchangePoints}
@@ -145,7 +145,7 @@ const MembersGifts = () => {
                 <option>Tiers points</option>
               </select>
               <button
-                className={` my-5 w-full bg-gradient-to-tl from-blue-500 to-blue-300 leading-tight text-x 
+                className={` my-5 w-full bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x 
               bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl 
               hover:from-blue-600 hover:to-blue-400`}
                 onClick={companyGift}
