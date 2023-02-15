@@ -3,7 +3,7 @@ const UseFetch = async (
   url,
   method,
   body,
-  content = "application/json"
+  content
 ) => {
   var connect;
   if (body != null ) {

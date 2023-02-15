@@ -1,55 +1,36 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../../context/AuthContext";
+import React from "react";
 import { TitleContext } from "../../../context/TitleContext";
-import {  Modal,   } from "antd";
-const List = () => {
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../context/AuthContext";
+import UseFetch from "../../../custom/UseFetch";
+import { AlertContex } from "../../../context/AlertContext";
+import { CleaningServices } from "@mui/icons-material";
+
+function MemberRelation() {
+  const { toggleOn } = useContext(AlertContex);
   const { setTitle } = useContext(TitleContext);
-  const [admins, setAdmins] = useState([]);
-  const { token ,user} = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
+  const [relations, setRelations] = useState([]);
 
-  const getAdmins = async () => {
-    const response = await fetch(`http://localhost:3002/api/v1/admins`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
-      },
-    });
-    const json = await response.json();
-    if (json.success) {
-      const newadmins = [...json.data];
-        const findeind = newadmins.filter((i) => i.id !== user.id);
-        setAdmins(findeind);
+  const getMemberRelation = async () => {
+    const response = await UseFetch(
+      `${process.env.REACT_APP_API_GET_MEMBERSHIPRELATION}`,
+      "GET",
+      null,
+      { "content-Type": "application/json", authorization: `Bearer ${token}` }
+    );
+    if (await response.success) {
+      console.log(response);
+      setRelations([...response.data]);
+      toggleOn(response.messages, response.success);
     }
   };
-
-  const removeAdmin = async (id) => {
-    const answer = window.confirm("are you sure you want to delet the admin?");
-    if (answer) {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_GET_DELETE_ADMIN}/${id} `,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const json = await response.json();
-      if (json.success) {
-        const newadmins = [...admins];
-        const findeind = newadmins.filter((i) => i.id !== id);
-        setAdmins(findeind);
-      }
-    }
-  };
-
- 
+  console.log(relations);
 
   useEffect(() => {
-    setTitle("Admis Lists");
-    getAdmins();
+    setTitle(" Member Relation");
+    getMemberRelation();
+
     // eslint-disable-next-line
   }, []);
   return (
@@ -68,7 +49,7 @@ const List = () => {
                       ADMIN NAME
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                     ADMIN EMAIL
+                      ADMIN EMAIL
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       CREATED ACCOUNT
@@ -76,36 +57,39 @@ const List = () => {
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       DELETE ADMIN
                     </th>
+                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                      DELETE ADMIN
+                    </th>
                   </tr>
                 </thead>
 
-                {admins?.map((admin, i) => {
+                {relations?.map((relation, i) => {
                   return (
                     <tbody>
-                      <tr>
+                      <tr key={i}>
                         <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <p className="mb-0 font-semibold leading-tight text-xs">
-                            <div>{admin?.name}</div>
+                            <div>{relation.firstMemberId}</div>
                           </p>
                         </td>
                         <td className="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
                           <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{admin?.email}</div>
+                            <div>{relation?.secondMemberId}</div>
                           </span>
                         </td>
                         <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <div>{admin?.createdAt.substring(0,10)}</div>
+                            <div>{relation?.companyId}</div>
                           </span>
                         </td>
                         <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <span className="font-semibold leading-tight text-xs text-slate-400">
-                            <button
-                              onClick={() => removeAdmin(admin.id)}
-                              class=" h-10 text-white bg-red-600 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                            >
-                              DELETE
-                            </button>
+                            <div>{relation?.type}</div>
+                          </span>
+                        </td>
+                        <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <span className="font-semibold leading-tight text-xs text-slate-400">
+                            <div>{relation?.createdAt.substring(0,10)}</div>
                           </span>
                         </td>
                       </tr>
@@ -118,8 +102,7 @@ const List = () => {
         </div>
       </div>
     </div>
-     
   );
-};
+}
 
-export default List;
+export default MemberRelation;

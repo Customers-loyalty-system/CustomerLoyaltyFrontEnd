@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { TitleContext } from "../../../context/TitleContext";
 import { AuthContext } from "../../../context/AuthContext";
-import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 const Update = () => {
   const { setTitle } = useContext(TitleContext);
   const { token, user ,login ,setUser} = useContext(AuthContext);
-  const [data, setData] = useState({});
   const [sendContent, setSendContent] = useState({
     name: user.name,
     email: user.email,
@@ -34,14 +33,14 @@ const Update = () => {
 
   };
   useEffect(() => {
-    setTitle("Add new admin");
+    setTitle("update admin");
     // eslint-disable-next-line
   }, []);
   return (
     <>
       <div class="w-1/2 bg-white rounded shadow-2xl p-8 m-4">
         <h4 class="block w-full text-center text-gray-800 text-2xl font-bold mb-3">
-          update your account
+            UPDATE ADMIN  ACCOUNT
         </h4>
 
         <div class="flex flex-col mb-4">
@@ -103,11 +102,10 @@ const Update = () => {
         </div>
         <button  onClick={() => updateAdmin()}  class="ml-32 mt-3 h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
           update admin account </button>
-
-        <a
+        <Link
           class="block w-full text-center no-underline mt-4 text-sm text-gray-700 hover:text-gray-900"
-          href="/login"
-        ></a>
+          to={"/login"}
+        ></Link>
       </div>
     </>
   );
