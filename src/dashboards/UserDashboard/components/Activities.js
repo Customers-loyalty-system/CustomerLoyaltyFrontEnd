@@ -10,7 +10,7 @@ import { AlertContex } from "../../../context/AlertContext";
 import { AuthContext } from "../../../context/AuthContext";
 import PaginationBar from "../../PaginationBar/PaginationBar";
 
-export const Activities = ({ company, popUp, setPopUp }) => {
+export const Activities = ({ company, openActivities, setOpenActivities }) => {
   const [activites, setActivities] = useState([]);
   const { token } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
@@ -52,9 +52,9 @@ export const Activities = ({ company, popUp, setPopUp }) => {
           sx={{
             padding: "20px",
           }}
-          onClose={() => setPopUp(false)}
+          onClose={() => setOpenActivities(false)}
           aria-labelledby="customized-dialog-title"
-          open={popUp}
+          open={openActivities}
         >
           <DialogContent
             sx={{
@@ -69,8 +69,8 @@ export const Activities = ({ company, popUp, setPopUp }) => {
                   <h6>Activites</h6>
                 </div>
                 <div className="flex-auto px-0 pt-0 pb-2">
-                  <div className="p-0 overflow-x-hidden">
-                    <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
+                  <div className="p-0 overflow-x-hidden lg:overflow-x-hidden">
+                    <table className="items-center overflow-x-hidden w-full mb-0 align-top border-gray-200 text-slate-500">
                       <thead className="align-bottom">
                         <tr>
                           <th className="px-4 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
@@ -125,8 +125,7 @@ export const Activities = ({ company, popUp, setPopUp }) => {
           >
             <Button
               variant="contained"
-              color="success"
-              onClick={() => setPopUp(false)}
+              onClick={() => setOpenActivities(false)}
             >
               close
             </Button>

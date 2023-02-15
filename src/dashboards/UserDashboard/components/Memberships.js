@@ -18,27 +18,42 @@ const Memberships = () => {
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    if ((await response.data.length) > 0) {
+    if (response.success) {
       toggleOn(response.messages, response.success);
       setMemberships([...response.data]);
-    } else {
-      toggleOn(response.messages, response.success);
-    }
+    } else toggleOn(response.messages, response.success);
   };
   useEffect(() => {
-    setTitle("Memperships");
+    setTitle("Memberships");
     getMemberships();
     // eslint-disable-next-line
   }, []);
 
   return (
-      <div className="w-full flex-wrap -mx-3  ">
-        <div className=" w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-6">
-          {memberships?.map((membership, i) => (
-          <MembershipCard key={i} membership={membership}/>
-          ))}
+    <>
+      {memberships.length > 0 ? (
+        <div className="w-full flex-wrap -mx-3  ">
+          <div className=" w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-6">
+            {memberships?.map((membership, i) => (
+              <MembershipCard
+                key={i}
+                membership={membership}
+                memberships={memberships}
+                setMemberships={setMemberships}
+              />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <di
+          className={
+            "flex flex-col uppercase justify-items-center items-center content-center font-bold italic"
+          }
+        >
+          YOU HAVE NO MEMBERSHIPS YET
+        </di>
+      )}
+    </>
   );
 };
 

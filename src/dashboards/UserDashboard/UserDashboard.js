@@ -42,7 +42,7 @@ const UserDashboard = (props) => {
     },
     {
       target: "/user/relations",
-      text: "Activities",
+      text: "Relations",
       icon: (
         <CardMembershipIcon
           sx={{ color: "white", width: "15px", height: "15px" }}
