@@ -4,39 +4,41 @@ import { TitleContext } from "../../../context/TitleContext";
 import UseFetch from "../../../custom/UseFetch";
 import PaginationBar from "../../PaginationBar/PaginationBar";
 import { AlertContex } from "../../../context/AlertContext";
-
+import ClassNameGenerator from "@mui/utils/ClassNameGenerator";
 
 const Activitiy = () => {
   const { toggleOn } = useContext(AlertContex);
   const { setTitle } = useContext(TitleContext);
   const [activities, setActivities] = useState([]);
   const { token } = useContext(AuthContext);
-    const [page, setPage] = useState(1);
-  const [pageCount, setPageCount] = useState(0)
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
   const getActivities = async (pangeNum) => {
-    const activities = await UseFetch(
-      `${process.env.REACT_APP_API_GET_ACTIVITIES}?page=${pangeNum}`,
+    const response = await UseFetch(
+      `${process.env.REACT_APP_API_GET_USER_ACTIVITIES}?page=${pangeNum}`,
       "GET",
       null,
       { "content-Type": "application/json", authorization: `Bearer ${token}` }
     );
-    if (await activities.success) {
-      setActivities([...activities.data.rows]);
-      setPageCount(activities.data.pageCount)
-      toggleOn(activities.messages, activities.success);
+    
+    if (await response.success) {
+    console.log(response)
+
+      setActivities([...response.data.rows]);
+      setPageCount(response.data.pageCount);
+      toggleOn(response.messages, response.success);
     }
   };
-  console.log("ssssssssssss", activities);
   useEffect(() => {
     setTitle("Admis Activities");
     getActivities(page);
     // eslint-disable-next-line
   }, []);
-  
-  useEffect(()=> { 
-   getActivities(page)
+
+  useEffect(() => {
+    getActivities(page);
     // eslint-disable-next-line
-  }, [page])
+  }, [page]);
 
   return (
     <div className="flex flex-wrap -mx-3">
@@ -50,7 +52,7 @@ const Activitiy = () => {
               <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                 <thead className="align-bottom">
                   <tr>
-                  <th className="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                    <th className="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       Type
                     </th>
                     <th className="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
@@ -73,7 +75,7 @@ const Activitiy = () => {
 
                 <tbody>
                   {activities?.map((activity, i) => (
-                    <tr key={i} className='hover:bg-slate-50 cursor-pointer'>
+                    <tr key={i} className="hover:bg-slate-50 cursor-pointer">
                       <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <p className="mb-0 font-semibold leading-tight text-xs">
                           {activity?.type}
@@ -107,10 +109,9 @@ const Activitiy = () => {
                     </tr>
                   ))}
                 </tbody>
-   
               </table>
               <div className="flex w-full flex-row justify-center mt-5 mb-2">
-                <PaginationBar pageCount={pageCount} setPage={setPage}/>
+                <PaginationBar pageCount={pageCount} setPage={setPage} />
               </div>
             </div>
           </div>

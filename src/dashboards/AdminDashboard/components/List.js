@@ -3,11 +3,20 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import { TitleContext } from "../../../context/TitleContext";
 import {  Modal,   } from "antd";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 const List = () => {
   const { setTitle } = useContext(TitleContext);
   const [admins, setAdmins] = useState([]);
   const { token ,user} = useContext(AuthContext);
-
+  const [adiminId, setadiminId] = useState();
+  const [deleteadmin, setDeleteadmin] = useState(false);
+  const [Index, setIndex] = useState();
+  
   const getAdmins = async () => {
     const response = await fetch(`http://localhost:3002/api/v1/admins`, {
       method: "GET",
@@ -24,11 +33,14 @@ const List = () => {
     }
   };
 
+  const handleDelelteAdminClose = () => {
+    setDeleteadmin(false);
+  };
+
+
   const removeAdmin = async (id) => {
-    const answer = window.confirm("are you sure you want to delet the admin?");
-    if (answer) {
       const response = await fetch(
-        `${process.env.REACT_APP_API_GET_DELETE_ADMIN}/${id} `,
+        `${process.env.REACT_APP_API_GET_DELETE_ADMIN}/${adiminId} `,
         {
           method: "DELETE",
           headers: {
@@ -41,8 +53,9 @@ const List = () => {
         const newadmins = [...admins];
         const findeind = newadmins.filter((i) => i.id !== id);
         setAdmins(findeind);
+        setDeleteadmin(false)
       }
-    }
+    
   };
 
  
@@ -101,7 +114,11 @@ const List = () => {
                         <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                           <span className="font-semibold leading-tight text-xs text-slate-400">
                             <button
-                              onClick={() => removeAdmin(admin.id)}
+                              onClick={() => {
+                                setadiminId(admin.id);
+                                setDeleteadmin(true);
+                                setIndex(i);
+                              }}
                               class=" h-10 text-white bg-red-600 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                             >
                               DELETE
@@ -117,6 +134,32 @@ const List = () => {
           </div>
         </div>
       </div>
+      <Dialog
+          open={deleteadmin}
+          onClose={handleDelelteAdminClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Are you sure you want to delete this configuration?"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              If you delete this configuration it will affect the old members
+              tiers , However, now you can use the same points amount now for
+              another configuration.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              sx={{ border: "0px" }}
+              onClick={handleDelelteAdminClose}
+            >
+              Disagree
+            </Button>
+            <Button onClick={removeAdmin}>Agree</Button>
+          </DialogActions>
+        </Dialog>
     </div>
      
   );
