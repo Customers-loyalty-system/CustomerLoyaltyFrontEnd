@@ -9,8 +9,6 @@ const List = () => {
   const { token } = useContext(AuthContext);
 
   const getAdmins = async () => {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaa");
-
     const response = await fetch(`http://localhost:3002/api/v1/admins`, {
       method: "GET",
       headers: {
@@ -22,7 +20,6 @@ const List = () => {
     if (json.success) {
       setAdmins(json.data);
     }
-    console.log("ssssssssssss", admins);
   };
 
   useEffect(() => {

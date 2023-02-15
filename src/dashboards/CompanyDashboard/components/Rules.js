@@ -10,6 +10,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useRef } from "react";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import { AlertContex } from "../../../context/AlertContext";
 
 const Rules = () => {
 

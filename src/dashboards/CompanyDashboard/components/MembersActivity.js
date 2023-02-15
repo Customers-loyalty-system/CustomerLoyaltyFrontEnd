@@ -23,7 +23,7 @@ const MembersActivity = () => {
       setActivities([...activities.data.rows]);
       setPageCount(activities.data.pageCount);
       toggleOn(activities.messages, activities.success);
-    } else if (activities.data == 0) {
+    } else if (activities.data === 0) {
       toggleOn("Your company doesn't have any members activities yet", false);
     }
   };
@@ -40,7 +40,7 @@ const MembersActivity = () => {
 
   return (
     <>
-      {activities.length == 0 ? (
+      {activities.length === 0 ? (
         <div className="flex flex-wrap -mx-3">
           <div className="flex-none w-full max-w-full px-3">
             <div className="relative flex flex-col min-w-0 mb-8 text-center mt-10">

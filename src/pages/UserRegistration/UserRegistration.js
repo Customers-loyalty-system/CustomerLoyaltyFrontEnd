@@ -201,7 +201,6 @@ const UserRegistration = () => {
                   <option>Ms</option>
                   <option>Mr</option>
                   <option>Miss</option>
-                  <option>Mr</option>
                 </select>
               </div>
               <div className="col-span-full">

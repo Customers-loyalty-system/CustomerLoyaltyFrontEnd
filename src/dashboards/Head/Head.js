@@ -5,18 +5,23 @@ import { useNavigate } from "react-router-dom";
 import { TitleContext } from "../../context/TitleContext";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import CompanyProfile from "../CompanyDashboard/components/CompanyProfile";
+import UserProfile from "../UserDashboard/components/UserProfile";
 
 const Head = ({ setSidenavOpen, sidenavOpen }) => {
   const { logout } = useContext(AuthContext);
   const { title } = useContext(TitleContext);
-  const {  user} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
 
   const [companyProfile, setCompanyProfile] = useState(false);
+  const [userProfile, setUserProfile] = useState(false);
+
 
 
   const handleClickOpen = () => {
     if (user.type === "company") setCompanyProfile(true);
+    if (user.type === "user") setUserProfile(true);
   };
+  
 
   const navigate = useNavigate();
   const logoutService = () => {
@@ -101,6 +106,7 @@ const Head = ({ setSidenavOpen, sidenavOpen }) => {
           </div>
         </div>
         <CompanyProfile companyProfile={companyProfile} setCompanyProfile={setCompanyProfile} />
+        <UserProfile userProfile={userProfile} setUserProfile={setUserProfile} />
       </nav>
     </>
   );
