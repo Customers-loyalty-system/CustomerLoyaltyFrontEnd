@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import { TitleContext } from "../../../context/TitleContext";
-import {  Modal,   } from "antd";
 const List = () => {
   const { setTitle } = useContext(TitleContext);
   const [admins, setAdmins] = useState([]);

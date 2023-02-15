@@ -15,7 +15,7 @@ const MembersActivity = () => {
   
   const getActivity = async (pangeNum) => {
     const activities = await UseFetch(
-      `${process.env.REACT_APP_API_GET_ACTIVITIES}?page=${pangeNum}`,
+      `${process.env.REACT_APP_API_GET_COMPANY_ACTIVITIES}?page=${pangeNum}`,
       "GET",
       null,
       { "content-Type": "application/json", authorization: `Bearer ${token}` }

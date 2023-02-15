@@ -3,6 +3,7 @@ import React, { Suspense} from "react";
 import { Route, Routes } from "react-router-dom";
 import Notification from "./components/Notifications/Notifications";
 import Login from "./pages/Login/Login"
+import MemberRelation from "./dashboards/AdminDashboard/components/MemberRelation";
 
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const UserRegistration = React.lazy(() =>
@@ -67,7 +68,7 @@ const App = () => {
           <Route path="Update" element={<Suspense><Update /></Suspense>} /> 
           <Route path="activities" element={<Suspense><Activitiy /></Suspense>} /> 
           <Route path="addbill" element={<Suspense><AddBill /></Suspense>} /> 
-          <Route path="MemberRelation" element={<Suspense><MemberRelation /></Suspense>} /> 
+          <Route path="memberrelation" element={<Suspense><MemberRelation /></Suspense>} /> 
         </Route>
       </Routes>
       <Notification />
