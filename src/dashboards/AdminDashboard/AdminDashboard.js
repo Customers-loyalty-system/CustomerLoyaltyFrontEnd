@@ -6,8 +6,10 @@ import Head from "../Head/Head";
 import { Outlet } from "react-router-dom";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ReorderIcon from "@mui/icons-material/Reorder";
-import ListAltIcon from "@mui/icons-material/ListAlt";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import GroupsIcon from "@mui/icons-material/Groups";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import BusinessIcon from '@mui/icons-material/Business';
 
 const AdminDashboard = () => {
   const { token, user, logout } = useContext(AuthContext);
@@ -47,25 +49,41 @@ const AdminDashboard = () => {
         ),
       },
       {
+        target: "/admin/companies",
+        text: "All Companies",
+        icon: (
+          <BusinessIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+        ),
+      },
+      {
+        target: "/admin/users",
+        text: "All Users",
+        icon: (
+          <GroupsIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+        ),
+      },
+
+      {
         target: "/admin/members",
         text: "All Members",
         icon: (
           <LoyaltyIcon sx={{ color: "white", width: "18px", height: "18px" }} />
         ),
       },
-
+      {
+        target: "/admin/relations",
+        text: " Members Relations",
+        icon: (
+          <PeopleAltIcon
+            sx={{ color: "white", width: "18px", height: "18px" }}
+          />
+        ),
+      },
       {
         target: "/admin/activities",
         text: " Activities",
         icon: (
           <ReorderIcon sx={{ color: "white", width: "18px", height: "18px" }} />
-        ),
-      },
-      {
-        target: "/admin/relations",
-        text: " Members Relations",
-        icon: (
-          <ListAltIcon sx={{ color: "white", width: "18px", height: "18px" }} />
         ),
       },
     ];
@@ -81,6 +99,20 @@ const AdminDashboard = () => {
         ),
       },
       {
+        target: "/admin/companies",
+        text: "All Companies",
+        icon: (
+          <BusinessIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+        ),
+      },
+      {
+        target: "/admin/users",
+        text: "All Users",
+        icon: (
+          <GroupsIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+        ),
+      },
+      {
         target: "/admin/members",
         text: "All Members",
         icon: (
@@ -88,18 +120,19 @@ const AdminDashboard = () => {
         ),
       },
       {
+        target: "/admin/relations",
+        text: " Members Relations",
+        icon: (
+          <PeopleAltIcon
+            sx={{ color: "white", width: "18px", height: "18px" }}
+          />
+        ),
+      },
+      {
         target: "/admin/activities",
         text: " Activities",
         icon: (
           <ReorderIcon sx={{ color: "white", width: "18px", height: "18px" }} />
-        ),
-      },
-
-      {
-        target: "/admin/relations",
-        text: " Members Relations",
-        icon: (
-          <ListAltIcon sx={{ color: "white", width: "18px", height: "18px" }} />
         ),
       },
     ];

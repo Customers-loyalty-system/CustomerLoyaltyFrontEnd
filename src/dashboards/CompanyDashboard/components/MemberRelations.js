@@ -21,7 +21,6 @@ const MembersRelations = () => {
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    console.log(response);
     if ((await response.data.relations.length) > 0) {
       setMembersRelation([...response.data.relations]);
       toggleOn(response.messages, response.success);

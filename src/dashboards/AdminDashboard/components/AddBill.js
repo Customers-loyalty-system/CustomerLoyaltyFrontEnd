@@ -2,31 +2,43 @@ import React from "react";
 import { useContext, useEffect, useRef } from "react";
 import { TitleContext } from "../../../context/TitleContext";
 import { AuthContext } from "../../../context/AuthContext";
-// import { Button } from "@mui/material";
+import UseFetch from "../../../custom/UseFetch";
+import { AlertContex } from "../../../context/AlertContext";
 function AddBill() {
   const { setTitle } = useContext(TitleContext);
   const { token } = useContext(AuthContext);
-  const amountRef = useRef();
+  const { toggleOn } = useContext(AlertContex);
+
+  const billNumberRef = useRef();
+  const billReferenceRef = useRef();
+  const companyNameRef = useRef();
   const phoneRef = useRef();
 
   const addBill = async (e) => {
-    const amount = amountRef.current.value;
-    const phone = phoneRef.current.value;
-
-    const response = await fetch(`${process.env.REACT_APP_API_ADD_BILL}`, {
-      method: "POST",
-      body: JSON.stringify({
-        amount: amount,
-        phone: phone,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+    const response = await UseFetch(
+      process.env.REACT_APP_API_ADD_BILL,
+      "POST",
+      {
+        billNumber: billNumberRef.current.value,
+        billReference: billReferenceRef.current.value,
+        companyName: companyNameRef.current.value,
+        phone: phoneRef.current.value,
       },
-    });
-    const json = await response.json();
-    console.log(json);
-    if (json.success) alert(json.messages);
+      { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
+    );
+    if (response.success) {
+      toggleOn(response.messages, response.success);
+      billNumberRef.current.value = "";
+      billReferenceRef.current.value = "";
+      companyNameRef.current.value = "";
+      phoneRef.current.value = "";
+    } else {
+      if (response.messages == "") {
+        toggleOn("Something went wrong, Please try again!", response.success);
+      } else {
+        toggleOn(response.messages, response.success);
+      }
+    }
   };
 
   useEffect(() => {
@@ -35,42 +47,91 @@ function AddBill() {
   }, []);
   return (
     <>
-      <div className="w-1/2 bg-white rounded shadow-2xl p-8 m-4">
-        <h4 className="block w-full text-center text-gray-800 text-2xl font-bold mb-3">
-          ADD NEW BILL
-        </h4>
+      <div className="w-full flex-wrap -mx-3">
+        <div className=" w-full grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 md:gap-6 xl:gap-6">
+          <div className="relative flex flex-col w-full items-center shadow-soft-xl rounded-2xl bg-clip-border bg-white">
+            <div className="font-bold text-slate-700 mt-2 text-lg capitalize">
+              Add Bill
+            </div>
+            <div className="mt-7 w-1/2 flex flex-col items-center">
+              <label
+                htmlFor="bill"
+                className="mb-3 text-sm text-center font-medium text-gray-700"
+              >
+                Bill Number
+              </label>
+              <input
+                id="bill"
+                type="text"
+                name="bill"
+                required=""
+                ref={billNumberRef}
+                placeholder="Bill Number"
+                className="block w-full appearance-none rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
+              />
+            </div>
+            <div className="mt-7 w-1/2 flex flex-col items-center">
+              <label
+                htmlFor="Reference"
+                className="mb-3 text-sm text-center font-medium text-gray-700"
+              >
+                Phone Reference
+              </label>
+              <input
+                id="Reference"
+                type="text"
+                name="Reference"
+                required=""
+                ref={billReferenceRef}
+                placeholder="Phone Reference"
+                className="block w-full appearance-none rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
+              />
+            </div>
+            <div className="mt-7 w-1/2 flex flex-col items-center">
+              <label
+                htmlFor="name"
+                className="mb-3 text-sm text-center font-medium text-gray-700"
+              >
+                Company Name
+              </label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                required=""
+                ref={companyNameRef}
+                placeholder="Company Name"
+                className="block w-full appearance-none rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
+              />
+            </div>
 
-        <div className="flex flex-col mb-4">
-          <label className="mb-2 font-bold text-lg text-gray-900" htmlFor="first_name">
-            AMOUNT
-          </label>
-          <input
-            ref={amountRef}
-            className="border py-2 px-3 text-neutral-900"
-            type="text"
-            name="name"
-            id="name"
-          />
+            <div className="mt-7 w-1/2 flex flex-col items-center">
+              <label
+                htmlFor="phone"
+                className="mb-3 text-sm text-center font-medium text-gray-700"
+              >
+                Phone number
+              </label>
+              <input
+                id="phone"
+                type="text"
+                name="phone"
+                required=""
+                ref={phoneRef}
+                placeholder="Phone"
+                className="block w-full appearance-none rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
+              />
+            </div>
+            <button
+              className={` my-5 mt-10 w-1/4 bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x 
+              bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl 
+              hover:from-blue-600 hover:to-blue-400`}
+              onClick={addBill}
+            >
+              Add New Bill
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col mb-4">
-          <label className="mb-2 font-bold text-lg text-gray-900" htmlFor="email">
-            PHONE NUMBER
-          </label>
-          <input
-            ref={phoneRef}
-            className="border py-2 px-3  text-neutral-900"
-            type="text"
-            name="phone"
-            id="phone"
-          />
-        </div>
-
-        <button
-          onClick={() => addBill()}
-          className="ml-32 mt-3 h-10 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-        >
-          Create admin
-        </button>
       </div>
     </>
   );
