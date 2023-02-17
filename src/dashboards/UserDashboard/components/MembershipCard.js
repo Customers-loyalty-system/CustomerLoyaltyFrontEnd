@@ -7,13 +7,12 @@ import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import AddRelation from "./AddRelation";
 import SharePoints from "./SharePoints";
 import GroupIcon from "@mui/icons-material/Group";
-import DeleteIcon from "@mui/icons-material/Delete";
 import UseFetch from "../../../custom/UseFetch";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
-
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { AuthContext } from "../../../context/AuthContext";
 import { AlertContex } from "../../../context/AlertContext";
 const MembershipCard = ({ membership, memberships, setMemberships }) => {
@@ -61,7 +60,7 @@ const MembershipCard = ({ membership, memberships, setMemberships }) => {
         className="flex flex-row w-full justify-around mb-2 px-20 "
       >
         <div className="flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer bg-center items-center justify-center p-2   ">
-          <DeleteIcon
+          <RemoveCircleIcon
             onClick={() => setMembershipDelete(true)}
             className=""
             sx={{
@@ -70,24 +69,39 @@ const MembershipCard = ({ membership, memberships, setMemberships }) => {
           />
         </div>
         <Dialog
+
           open={membershipDelete}
           onClose={() => setMembershipDelete(false)}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">
+          <DialogTitle  id="alert-dialog-title">
             {"Are you sure you want to delete your membership?"}
           </DialogTitle>
-          <DialogActions>
+          <DialogActions
+          >
             <Button
+                 size={"small"}
+                 variant="contained" 
+                 sx={{
+                   borderRadius: 5,
+                   outline:"none",
+                   border:"none",
+                   stroke:"none",
+                   "&:hover": { backgroundColor: "none" }
+                 }}
               onClick={() => setMembershipDelete(false)}
-              sx={{ color: "#334155" }}
-              autoFocus
-            >
+                >
               Disagree
             </Button>
             <Button
-              sx={{ color: "#334155" }}
+              size={"small"}
+              variant="contained" 
+              sx={{
+                borderRadius: 5,
+                outline:"none",
+                "&:hover": { backgroundColor: "#a11d1d" }
+              }}
               onClick={() => deleteMembership(membership.id)}
             >
               Agree
