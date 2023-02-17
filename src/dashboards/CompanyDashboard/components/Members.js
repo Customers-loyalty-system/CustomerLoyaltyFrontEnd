@@ -4,6 +4,7 @@ import { TitleContext } from "../../../context/TitleContext";
 import UseFetch from "../../../custom/UseFetch";
 import { AlertContex } from "../../../context/AlertContext";
 import PaginationBar from "../../PaginationBar/PaginationBar";
+import AddMember from "./AddMember";
 
 const Members = () => {
   const { token } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const Members = () => {
   const [members, setMembers] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-
+  const [addMember, setAddMember] = useState(false)
   const getMembers = async (page) => {
     const response = await UseFetch(
       `${process.env.REACT_APP_API_GET_COMPANY_MEMBERS}?page=${page}`,
@@ -44,6 +45,12 @@ const Members = () => {
       {members.length === 0 ? (
         <div className="flex flex-wrap -mx-3">
           <div className="flex-none w-full max-w-full px-3">
+          <button
+              onClick={() => setAddMember(true)}
+              className="absolute right-20 flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
+            >
+              Add New Member
+            </button>
             <div className="relative flex flex-col min-w-0 mb-8 text-center mt-10">
               Your company doesn't have any members yet.
             </div>
@@ -52,7 +59,14 @@ const Members = () => {
       ) : (
         <div className="flex flex-wrap -mx-3">
           <div className="flex-none w-full max-w-full px-3">
-            <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
+          <button
+              onClick={() => setAddMember(true)}
+              className="absolute right-20 z-990 flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
+            >
+              Add New Member
+            </button>
+
+            <div className="relative flex flex-col min-w-0 mt-12 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
               <div className="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                 <h6>Members Table</h6>
               </div>
@@ -142,6 +156,7 @@ const Members = () => {
               </div>
             </div>
           </div>
+          <AddMember addMember={addMember} setAddMember={setAddMember} setMembers={setMembers} />
         </div>
       )}
     </>

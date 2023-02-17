@@ -28,18 +28,13 @@ const MembersGifts = () => {
     );
     if (response.success) {
       toggleOn(response.messages, response.success);
-      redemptionPhonesRef.current.value = " ";
+      redemptionPhonesRef.current.value = "";
     } else {
       toggleOn(response.messages, response.success);
     }
   };
 
   const companyGift = async () => {
-    console.log(
-      giftPhonesRef.current.value,
-      giftPointsRef.current.value,
-      giftPointsTypeRef.current.value
-    );
     const response = await UseFetch(
       process.env.REACT_APP_API_COMPANY_GIFT,
       "POST",
@@ -52,8 +47,8 @@ const MembersGifts = () => {
     );
     if (response.success) {
       toggleOn(response.messages, response.success);
-      giftPhonesRef.current.value = " ";
-      giftPointsRef.current.value = " ";
+      giftPhonesRef.current.value = "";
+      giftPointsRef.current.value = "";
     } else {
       toggleOn(response.messages, response.success);
     }

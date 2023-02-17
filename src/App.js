@@ -32,6 +32,9 @@ const Gifts = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/
 const CompanyMembersRelations = React.lazy(()=> import( "./dashboards/CompanyDashboard/components/MemberRelations"))
 const AdminMembersRelations = React.lazy(()=> import( "./dashboards/AdminDashboard/components/MemberRelation"))
 const AdminMembers = React.lazy(()=> import( "./dashboards/AdminDashboard/components/AdminMembers"))
+const AdminUsers = React.lazy(()=> import( "./dashboards/AdminDashboard/components/AdminUsers"))
+const AdminCompanies = React.lazy(()=> import( "./dashboards/AdminDashboard/components/AdminCompanies"))
+
 
 
 
@@ -66,6 +69,8 @@ const App = () => {
           <Route path="" element={<Suspense><AddBill /></Suspense>} /> 
           <Route path="relations" element={<Suspense><AdminMembersRelations /></Suspense>} /> 
           <Route path="members" element={<Suspense><AdminMembers /></Suspense>} /> 
+          <Route path="users" element={<Suspense><AdminUsers /></Suspense>} /> 
+          <Route path="companies" element={<Suspense><AdminCompanies /></Suspense>} /> 
 
         </Route>
       </Routes>

@@ -8,7 +8,7 @@ import ReorderIcon from '@mui/icons-material/Reorder';
 import TuneIcon from '@mui/icons-material/Tune';
 import SettingsInputCompositeIcon from '@mui/icons-material/SettingsInputComposite';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 const CompanyDashboard = (props) => {
   const { token, user, logout } = useContext(AuthContext);
@@ -67,7 +67,7 @@ const CompanyDashboard = (props) => {
       target: "/company/relations",
       text: "Members Relations",
       icon: (
-        <ListAltIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+        <PeopleAltIcon sx={{ color: "white", width: "18px", height: "18px" }} />
       ),
     },
   ];

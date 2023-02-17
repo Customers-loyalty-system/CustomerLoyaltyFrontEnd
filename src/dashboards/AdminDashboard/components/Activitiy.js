@@ -27,7 +27,7 @@ const Activitiy = () => {
     }
   };
   useEffect(() => {
-    setTitle("Admis Activities");
+    setTitle("Activities List");
     getActivities(page);
     // eslint-disable-next-line
   }, []);

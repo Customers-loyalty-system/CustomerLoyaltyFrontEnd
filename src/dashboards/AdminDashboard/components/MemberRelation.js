@@ -21,21 +21,20 @@ const MembersRelation = () => {
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    console.log(response);
-    if ((await response.data.relations.length) > 0) {
+    if ((await response.data.count) > 0) {
       setMembersRelation([...response.data.relations]);
       toggleOn(response.messages, response.success);
       setPageCount(response.data.pageCount);
     } else {
       toggleOn(
-        "Your company doesn't have any relations between the members yet. ",
+        "No members relations found ",
         response.success
       );
     }
   };
 
   useEffect(() => {
-    setTitle("Members Relations");
+    setTitle("Members Relations List");
     getMembersRelations(page);
     // eslint-disable-next-line
   }, []);
@@ -51,7 +50,7 @@ const MembersRelation = () => {
         <div className="flex flex-wrap -mx-3">
           <div className="flex-none w-full max-w-full px-3">
             <div className="relative flex flex-col min-w-0 mb-8 text-center mt-10">
-              Your company doesn't have any relations between the members yet.
+              No members relations found.
             </div>
           </div>
         </div>
@@ -73,106 +72,130 @@ const MembersRelation = () => {
                         <th className="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                           Second member
                         </th>
-                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                        <th className="px-4 py-1 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                           Relation Type
                         </th>
-                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                        <th className="px-4 py-1 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                           Company Name
                         </th>
-                        <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                          RElation start DATE
+                        <th className="px-4 py-1 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                          Relation start DATE
+                        </th>
+                        <th className="px-4 py-1 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                           Relation status
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {membersRelations.map((relations, i) => (
+                      {membersRelations.map((relation, i) => (
                         <tr
                           key={i}
                           className="hover:bg-slate-50 cursor-pointer"
                         >
-                          <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <td className="p-1 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <div className="flex px-2 py-1">
                               <div>
                                 <img
-                                  src={relations.firstMember.User.avatar}
+                                  src={relation.firstMember.User?.avatar}
                                   className="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
                                   alt="user1"
                                 />
                               </div>
                               <div className="flex flex-col justify-center">
                                 <h6 className="mb-1 leading-normal text-sm">
-                                  {relations.firstMember.User.name}{" "}
-                                  {relations.firstMember.User.surname}
+                                  {relation.firstMember.User?.name}{" "}
+                                  {relation.firstMember.User?.surname}
                                 </h6>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  {relations.firstMember.User.email}
+                                  {relation.firstMember.User?.email}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  {relations.firstMember.membershipNumber}
+                                  {relation.firstMember.membershipNumber}
                                 </p>{" "}
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  Current Tier: {relations.firstMember.membershipTier}
+                                  Current Tier: {relation.firstMember.membershipTier}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
                                   Standard Points:{" "}
-                                  {relations.firstMember.standardPoints}
+                                  {relation.firstMember.standardPoints}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
                                   Teirs Points:{" "}
-                                  {relations.firstMember.tiersPoints}
+                                  {relation.firstMember.tiersPoints}
                                 </p>
                               </div>
                             </div>
                           </td>
-                          <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <td className="p-1 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <div className="flex px-2 py-1">
                               <div>
                                 <img
-                                  src={relations.secondMember.User.avatar}
+                                  src={relation.secondMember.User?.avatar}
                                   className="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
                                   alt="user1"
                                 />
                               </div>
                               <div className="flex flex-col justify-center">
                                 <h6 className="mb-1 leading-normal text-sm">
-                                  {relations.secondMember.User.name}{" "}
-                                  {relations.secondMember.User.surname}
+                                  {relation.secondMember.User?.name}{" "}
+                                  {relation.secondMember.User?.surname}
                                 </h6>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  {relations.secondMember.User.email}
+                                  {relation.secondMember.User?.email}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  {relations.secondMember.membershipNumber}
+                                  {relation.secondMember.membershipNumber}
                                 </p>{" "}
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
-                                  Current Tier: {relations.secondMember.membershipTier}
+                                  Current Tier: {relation.secondMember.membershipTier}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
                                   Standard Points:{" "}
-                                  {relations.secondMember.standardPoints}
+                                  {relation.secondMember.standardPoints}
                                 </p>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
                                   Teirs Points:{" "}
-                                  {relations.secondMember.tiersPoints}
+                                  {relation.secondMember.tiersPoints}
                                 </p>
                               </div>
                             </div>
                           </td>
-                          <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <td className="p-1 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <span className="font-semibold leading-tight text-xs text-slate-400">
-                              {relations.type}
+                              {relation.type}
                             </span>
                           </td>
-                          <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <td className="p-1 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <span className="font-semibold leading-tight capitalize text-xs text-slate-400">
-                              {relations.Company.name}
+                              {relation.Company.name}
                             </span>
                           </td>
-                          <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                          <td className="p-1 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <span className="font-semibold leading-tight text-xs text-slate-400">
-                              {relations.createdAt.substring(0, 10)}
+                              {relation.createdAt.substring(0, 10)}
                             </span>
                           </td>
+                          <td className="p-1 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                            <span className="font-semibold leading-tight text-xs text-slate-400">
+                              {relation.deletedAt == null ? (
+                                <p className="mb-1 leading-tight text-xs text-slate-400">
+                                  Active Relation
+                                </p>
+                              ) : (
+                                <div className="flex flex-col justify-center">
+                                  <p className="mb-1 leading-tight text-xs text-slate-400">
+                                    Inactive Relation
+                                  </p>
+                                  <p className="mb-1 leading-tight text-xs text-slate-400">
+                                    deactivate date:{" "}
+                                    {relation.deletedAt.substring(0, 10)}
+                                  </p>
+                                </div>
+                              )}
+                            </span>
+                          </td>
+
+                          
                         </tr>
                         
                       ))}
