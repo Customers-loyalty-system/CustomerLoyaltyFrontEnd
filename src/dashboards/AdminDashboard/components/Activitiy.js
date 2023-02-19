@@ -19,7 +19,7 @@ const Activitiy = () => {
       null,
       { "content-Type": "application/json", authorization: `Bearer ${token}` }
     );
-    
+
     if (await response.success) {
       setActivities([...response.data.rows]);
       setPageCount(response.data.pageCount);
@@ -52,7 +52,7 @@ const Activitiy = () => {
                     <th className="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       Type
                     </th>
-                    <th className="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                    <th className="px-6 py-3 pl-2 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       MEMNERSHIP NUMBER
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
@@ -60,6 +60,9 @@ const Activitiy = () => {
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       TIERS POINTS
+                    </th>
+                    <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                      company name
                     </th>
                     <th className="px-6 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                       BILL NUMBER
@@ -78,7 +81,7 @@ const Activitiy = () => {
                           {activity?.type}
                         </p>
                       </td>
-                      <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                      <td className="p-2 text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <p className="mb-0 font-semibold leading-tight text-xs">
                           {activity.Membership.membershipNumber}
                         </p>
@@ -95,7 +98,14 @@ const Activitiy = () => {
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <span className="font-semibold leading-tight text-xs text-slate-400">
-                          {activity?.Bill?.billNumber==null ? "-" : activity.Bill.billNumber}
+                          {activity.Membership.Company.name}
+                        </span>
+                      </td>
+                      <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                        <span className="font-semibold leading-tight text-xs text-slate-400">
+                          {activity?.Bill?.billNumber == null
+                            ? "-"
+                            : activity.Bill.billNumber}
                         </span>
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">

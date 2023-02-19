@@ -24,6 +24,7 @@ const AddMember = ({ addMember, setAddMember, setMembers }) => {
     if (response.success) {
       setMembers((pre) => [response.data, ...pre]);
       toggleOn(response.messages, response.success);
+      setAddMember(false)
     }else {
       toggleOn(response.messages, response.success);
     }

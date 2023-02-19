@@ -1,7 +1,6 @@
 import "../css/Dashboard.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { TitleContext } from "../../context/TitleContext";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import CompanyProfile from "../CompanyDashboard/components/CompanyProfile";
@@ -23,10 +22,9 @@ const Head = ({ setSidenavOpen, sidenavOpen }) => {
     if (user.type === "admin") setAdminProfile(true);
   };
 
-  const navigate = useNavigate();
   const logoutService = () => {
-    navigate("/");
     logout();
+    window.location.href = ("/");
   };
   return (
     <>

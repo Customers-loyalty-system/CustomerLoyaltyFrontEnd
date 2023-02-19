@@ -31,6 +31,15 @@ const Memberships = () => {
 
   return (
     <>
+      {memberships.length === 0 ? (
+        <div className="flex flex-wrap -mx-3">
+          <div className="flex-none w-full max-w-full px-3">
+            <div className="relative flex flex-col min-w-0 mb-8 text-center mt-10">
+              You do not have any memberships yet.
+            </div>
+          </div>
+        </div>
+      ) : (
         <div className="w-full flex-wrap -mx-3  ">
           <div className=" w-full grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-6">
             {memberships?.map((membership, i) => (
@@ -43,6 +52,7 @@ const Memberships = () => {
             ))}
           </div>
         </div>
+      )}
     </>
   );
 };

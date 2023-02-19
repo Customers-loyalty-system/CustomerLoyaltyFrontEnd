@@ -13,7 +13,7 @@ const Members = () => {
   const [members, setMembers] = useState([]);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(0);
-  const [addMember, setAddMember] = useState(false)
+  const [addMember, setAddMember] = useState(false);
   const getMembers = async (page) => {
     const response = await UseFetch(
       `${process.env.REACT_APP_API_GET_COMPANY_MEMBERS}?page=${page}`,
@@ -21,9 +21,11 @@ const Members = () => {
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    if ((await response.data.members.length) > 0) {
+    console.log(response);
+    if ((await response.data.count) > 0) {
+      console.log("test");
       setMembers([...response.data.members]);
-      setPageCount(response.data.pageCount)
+      setPageCount(response.data.pageCount);
       toggleOn(response.messages, response.success);
     } else {
       toggleOn("You do not have any members yet", false);
@@ -42,15 +44,16 @@ const Members = () => {
 
   return (
     <>
+      <button
+        onClick={() => setAddMember(true)}
+        className="absolute right-20 flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
+      >
+        Add New Member
+      </button>
+
       {members.length === 0 ? (
         <div className="flex flex-wrap -mx-3">
           <div className="flex-none w-full max-w-full px-3">
-          <button
-              onClick={() => setAddMember(true)}
-              className="absolute right-20 flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
-            >
-              Add New Member
-            </button>
             <div className="relative flex flex-col min-w-0 mb-8 text-center mt-10">
               Your company doesn't have any members yet.
             </div>
@@ -59,13 +62,6 @@ const Members = () => {
       ) : (
         <div className="flex flex-wrap -mx-3">
           <div className="flex-none w-full max-w-full px-3">
-          <button
-              onClick={() => setAddMember(true)}
-              className="absolute right-20 z-990 flex-none bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl hover:from-blue-600 hover:to-blue-400 "
-            >
-              Add New Member
-            </button>
-
             <div className="relative flex flex-col min-w-0 mt-12 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
               <div className="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                 <h6>Members Table</h6>
@@ -97,7 +93,10 @@ const Members = () => {
                     </thead>
                     <tbody>
                       {members.map((member, i) => (
-                        <tr key={i} className='hover:bg-slate-50 cursor-pointer'>
+                        <tr
+                          key={i}
+                          className="hover:bg-slate-50 cursor-pointer"
+                        >
                           <td className="p-2 align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                             <div className="flex px-2 py-1">
                               <div>
@@ -108,7 +107,7 @@ const Members = () => {
                                 />
                               </div>
                               <div className="flex flex-col justify-center">
-                                <h6 className="mb-1 leading-normal text-sm">
+                                <h6 className="mb-1 capitalize leading-normal text-sm">
                                   {member.User.name} {member.User.surname}
                                 </h6>
                                 <p className="mb-1 leading-tight text-xs text-slate-400">
@@ -156,8 +155,14 @@ const Members = () => {
               </div>
             </div>
           </div>
-          <AddMember addMember={addMember} setAddMember={setAddMember} setMembers={setMembers} />
         </div>
+      )}
+      {addMember && (
+        <AddMember
+          addMember={addMember}
+          setAddMember={setAddMember}
+          setMembers={setMembers}
+        />
       )}
     </>
   );

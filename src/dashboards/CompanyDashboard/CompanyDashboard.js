@@ -16,7 +16,6 @@ const CompanyDashboard = (props) => {
   useEffect(() => {
     if (!token || user.type !== "company") {
       window.location.href = "/login";
-
       logout();
     } else return;
     // eslint-disable-next-line

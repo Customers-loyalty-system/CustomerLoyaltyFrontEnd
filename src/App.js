@@ -48,19 +48,19 @@ const App = () => {
         <Route path="/companyregister" element={<Suspense><CompanyRegistration /></Suspense> } />
         
         <Route path="company/" element={<Suspense><Company /></Suspense>} >
-          <Route path="" element={<Suspense> <Members/></Suspense>}/>
           <Route path="membersactivities" element={<Suspense> <MembersActivity/></Suspense>}/>
           <Route path="rules" element={<Suspense> <Rules/></Suspense>}/>
           <Route path="configurations" element={<Suspense><Configurations/></Suspense>}/>
           <Route path="gifts" element={<Suspense><Gifts /></Suspense>}/>
           <Route path="relations" element={<Suspense><CompanyMembersRelations /></Suspense>}/>
+          <Route path="" element={<Suspense> <Members/></Suspense>}/>
 
         </Route>
 
-        <Route path="/user" element={<Suspense><User /> </Suspense>} >
-          <Route path="" element={<Suspense> <Memberships/></Suspense>}></Route>
+        <Route exact path="/user" element={<Suspense><User /> </Suspense>} >
           <Route path="activities" element={<Suspense><UserActivities/></Suspense>}></Route>
           <Route path="relations" element={<Suspense><UserRelations/></Suspense>}></Route>
+          <Route exact path="" element={<Suspense> <Memberships/></Suspense>}></Route>
         </Route>
 
         <Route path="admin/" element={<Suspense><Admin /></Suspense>} > 

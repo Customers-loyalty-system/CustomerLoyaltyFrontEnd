@@ -33,7 +33,7 @@ function AddBill() {
       companyNameRef.current.value = "";
       phoneRef.current.value = "";
     } else {
-      if (response.messages == "") {
+      if (response.messages === "") {
         toggleOn("Something went wrong, Please try again!", response.success);
       } else {
         toggleOn(response.messages, response.success);
@@ -48,7 +48,7 @@ function AddBill() {
   return (
     <>
       <div className="w-full flex-wrap -mx-3">
-        <div className=" w-full grid sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 md:gap-6 xl:gap-6">
+        <div className=" w-full grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2  gap-4 md:gap-6 xl:gap-6">
           <div className="relative flex flex-col w-full items-center shadow-soft-xl rounded-2xl bg-clip-border bg-white">
             <div className="font-bold text-slate-700 mt-2 text-lg capitalize">
               Add Bill
@@ -123,7 +123,7 @@ function AddBill() {
               />
             </div>
             <button
-              className={` my-5 mt-10 w-1/4 bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x 
+              className={` my-5 mt-10 w-1/3 bg-gradient-to-tl from-blue-500 to-blue-400 leading-tight text-x 
               bold border-2 rounded-full  shadow-transparent text-white p-2 px-3 hover:bg-gradient-to-tl 
               hover:from-blue-600 hover:to-blue-400`}
               onClick={addBill}

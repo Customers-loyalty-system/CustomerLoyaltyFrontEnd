@@ -4,17 +4,20 @@ import StanderdPoints from "./StanderdPoints";
 import TierPoints from "./TierPoints";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import AddRelation from "./AddRelation";
 import SharePoints from "./SharePoints";
-import GroupIcon from "@mui/icons-material/Group";
 import UseFetch from "../../../custom/UseFetch";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogContent from "@mui/material/DialogContent";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { AuthContext } from "../../../context/AuthContext";
 import { AlertContex } from "../../../context/AlertContext";
+import AddRelation from "./AddRelation";
+
 const MembershipCard = ({ membership, memberships, setMemberships }) => {
   const [openActivities, setOpenActivities] = useState(false);
   const [openAddRelation, setOpenAddRelation] = useState(false);
@@ -37,10 +40,19 @@ const MembershipCard = ({ membership, memberships, setMemberships }) => {
       setMemberships(newMembership);
       setMembershipDelete(false);
     }
-    if (memberships.length === 0) toggleOn("YOU HAVE NO MEMBERSHIPS YET", false ); 
+    if (memberships.length === 0)
+      toggleOn("YOU HAVE NO MEMBERSHIPS YET", false);
   };
+
+  const handleDelelteMembership = () => {
+    setMembershipDelete(false);
+  };
+
   return (
-    <div key={membership.id} className="relative flex flex-col items-center shadow-soft-xl rounded-2xl bg-clip-border w-full bg-white ">
+    <div
+      key={membership.id}
+      className="relative flex flex-col items-center shadow-soft-xl rounded-2xl bg-clip-border w-full bg-white "
+    >
       <div className="relative w-full flex flex-row mb-1 mt-3 items-center  ">
         <img
           alt="company logo"
@@ -52,130 +64,109 @@ const MembershipCard = ({ membership, memberships, setMemberships }) => {
         </h6>
       </div>
       <StanderdPoints membership={membership} />
-      <hr className="h-px w-full mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent " />
+      <hr className="h-px w-full mt-4 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent " />
       <TierPoints membership={membership} />
       <hr className="h-px w-full bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent " />
-      <div
-        id={"icons"}
-        className="flex flex-row w-full justify-around mb-2 px-20 "
-      >
-        <div className="flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer bg-center items-center justify-center p-2   ">
-          <RemoveCircleIcon
-            onClick={() => setMembershipDelete(true)}
-            className=""
-            sx={{
-              fontSize: "25px",
-            }}
-          />
-        </div>
-        <Dialog
-
-          open={membershipDelete}
-          onClose={() => setMembershipDelete(false)}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
+      <div className="flex flex-row w-full justify-around mb-3">
+        <button
+          onClick={() => setMembershipDelete(true)}
+          className="  w-1/6 focus:outline-none "
         >
-          <DialogTitle  id="alert-dialog-title">
-            {"Are you sure you want to delete your membership?"}
-          </DialogTitle>
-          <DialogActions
-          >
-            <Button
-                 size={"small"}
-                 variant="contained" 
-                 sx={{
-                   borderRadius: 5,
-                   outline:"none",
-                   border:"none",
-                   stroke:"none",
-                   "&:hover": { backgroundColor: "none" }
-                 }}
-              onClick={() => setMembershipDelete(false)}
-                >
-              Disagree
-            </Button>
-            <Button
-              size={"small"}
-              variant="contained" 
-              sx={{
-                borderRadius: 5,
-                outline:"none",
-                "&:hover": { backgroundColor: "#a11d1d" }
-              }}
-              onClick={() => deleteMembership(membership.id)}
-            >
-              Agree
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <div className=" flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer  bg-center items-center justify-center p-2  ">
+          <RemoveCircleIcon
+            sx={{
+              width: "25px",
+              height: "25px",
+              "&:hover": { color: "#dc2626" },
+            }}
+          />
+        </button>
+        <button
+          className="  w-1/6 focus:outline-none"
+          onClick={() => setOpenActivities(true)}
+        >
           <ReceiptLongIcon
-            onClick={() => {
-              if (!openActivities) {
-                setOpenActivities(true);
-              } else {
-                setOpenActivities(false);
-              }
-            }}
-            className=""
             sx={{
-              fontSize: "25px",
+              width: "25px",
+              height: "25px",
+              "&:hover": { color: "#4b5563" },
             }}
           />
-        </div>
-        <div className=" flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer  bg-center items-center justify-center p-2  ">
+        </button>
+        <button
+          onClick={() => setOpenSharePoints(true)}
+          className="  w-1/6 focus:outline-none"
+        >
+          <ControlPointDuplicateIcon
+            sx={{
+              width: "25px",
+              height: "25px",
+              "&:hover": { color: "#4b5563" },
+            }}
+          />
+        </button>
+        <button
+          onClick={() => setOpenAddRelation(true)}
+          className="w-1/6 focus:outline-none"
+        >
           <GroupAddIcon
-            onClick={() => {
-              if (!openAddRelation) {
-                setOpenAddRelation(true);
-              } else {
-                setOpenAddRelation(false);
-              }
-            }}
-            className=""
             sx={{
-              fontSize: "25px",
+              width: "25px",
+              height: "25px",
+              "&:hover": { color: "#4b5563" },
             }}
           />
-        </div>
-        <div className=" flex rounded-full bg-gradient-to-tl hover:text-slate-700 cursor-pointer  bg-center items-center justify-center p-2  ">
-          <GroupIcon
-            onClick={() => {
-              if (!openSharePoints) {
-                setOpenSharePoints(true);
-              } else {
-                setOpenSharePoints(false);
-              }
-            }}
-            className=""
-            sx={{
-              fontSize: "25px",
-            }}
-          />
-        </div>
+        </button>
       </div>
+
+      <Dialog
+        open={membershipDelete}
+        onClose={handleDelelteMembership}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Are you sure you want to delete this membership?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            If you delete this membership, you will not be a member in this
+            company and you will lose all your points and benefits from being a
+            member in this company. However, you can start a membership again in
+            the same company when ever you want.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button sx={{ color: "#334155" }} onClick={handleDelelteMembership}>
+            Disagree
+          </Button>
+          <Button
+            sx={{ color: "#334155" }}
+            onClick={() => deleteMembership(membership.id)}
+          >
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
       {openActivities && (
         <Activities
-          key={membership.id}
           company={membership.company}
           openActivities={openActivities}
           setOpenActivities={setOpenActivities}
         />
       )}
-      {openAddRelation && (
-        <AddRelation
-          companyName={membership.company.name}
-          key={membership.id}
-          openAddRelation={openAddRelation}
-          setOpenAddRelation={setOpenAddRelation}
-        />
-      )}
       {openSharePoints && (
         <SharePoints
           companyName={membership.company.name}
-          key={membership.id}
           openSharePoints={openSharePoints}
           setOpenSharePoints={setOpenSharePoints}
+          membership={membership}
+        />
+      )}
+      {openAddRelation && (
+        <AddRelation
+          companyName={membership.company.name}
+          openAddRelation={openAddRelation}
+          setOpenAddRelation={setOpenAddRelation}
         />
       )}
     </div>

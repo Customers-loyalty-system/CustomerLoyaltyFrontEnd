@@ -8,7 +8,6 @@ import DialogActions from "@mui/material/DialogActions";
 import UseFetch from "../../../custom/UseFetch";
 import { AlertContex } from "../../../context/AlertContext";
 import { AuthContext } from "../../../context/AuthContext";
-import PaginationBar from "../../PaginationBar/PaginationBar";
 
 export const Activities = ({ company, openActivities, setOpenActivities }) => {
   const [activites, setActivities] = useState([]);
@@ -30,7 +29,6 @@ export const Activities = ({ company, openActivities, setOpenActivities }) => {
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
     if (await response.success) {
-    toggleOn(response.messages, response.success);
       setActivities([...response.data.rows]);
   } else toggleOn(response.messages, response.success);
   };
@@ -116,16 +114,7 @@ export const Activities = ({ company, openActivities, setOpenActivities }) => {
             }}
           >
             <Button
-                size={"small"}
-                variant="contained"
-                sx={{
-                  borderRadius: 5,
-                  outline: "none",
-                  border: "none",
-                  stroke: "none",
-                  margin:'5px 0 5px',
-                  "&:hover": { backgroundColor: "#1976d2" },
-                }}
+                sx={{ color: "#334155" }}
                 onClick={() => setOpenActivities(false)}
               >
                 close

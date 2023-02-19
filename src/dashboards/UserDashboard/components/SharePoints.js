@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -6,26 +6,33 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 
-
 import UseFetch from "../../../custom/UseFetch";
 import { AuthContext } from "../../../context/AuthContext";
 import { AlertContex } from "../../../context/AlertContext";
 
-const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
+const SharePoints = ({
+  companyName,
+  openSharePoints,
+  setOpenSharePoints,
+  membership,
+}) => {
   const { token } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
-  const [data, setData] = useState([]);
-  const [inputValue, setInputValue] = useState({
-    phone: "",
-    points: "",
-    tier: "",
-    companyName: companyName,
-  });
+
+  const phoneRef = useRef();
+  const pointsRef = useRef();
+  const potinsTypeRef = useRef();
+  console.log(membership)
   const sharePoints = async () => {
     const response = await UseFetch(
       `${process.env.REACT_APP_API_SHARE_POINTS}`,
       "POST",
-      inputValue,
+      {
+        phone: phoneRef.current.value,
+        points: pointsRef.current.value,
+        tier: potinsTypeRef.current.value,
+        companyName: companyName,
+      },
       {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -33,137 +40,95 @@ const SharePoints = ({ companyName, openSharePoints, setOpenSharePoints }) => {
     );
     toggleOn(response.messages, response.success);
     if (response.success) {
-      setData([response.data]);
       toggleOn(response.messages, response.success);
+      setOpenSharePoints(false);
+      membership.standardPoints = response.data.sender.standardPoints
+      membership.tiersPoints = response.data.sender.tiersPoints
     }
   };
 
   return (
-    <div>
-      {data.length === 0 && (
-        <Dialog
-          open={openSharePoints}
-          onClose={() => {
-            if (openSharePoints) {
+    <Dialog
+      open={openSharePoints}
+      onClose={() => {
+        setOpenSharePoints(false);
+      }}
+      aria-labelledby="edit-apartment"
+    >
+      <DialogTitle id="edit-apartment">Share points</DialogTitle>
+      <DialogContent sx={{ width: "450px" }}>
+        <div className="col-span-full">
+          <label
+            htmlFor="phone"
+            className="mb-1 block text-sm font-medium text-gray-700"
+          >
+            Phone
+          </label>
+          <input
+            id="phone"
+            type="text"
+            name="phone"
+            ref={phoneRef}
+            autoComplete="phone"
+            required=""
+            className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
+          />
+        </div>
+        <div className="col-span-full">
+          <label
+            htmlFor="phone"
+            className="mb-1 block text-sm font-medium text-gray-700"
+          >
+            Points
+          </label>
+          <input
+            id="points"
+            type="number"
+            name="points"
+            ref={pointsRef}
+            required=""
+            className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
+          />
+        </div>
+        <div className="col-span-full">
+          <label
+            htmlFor="type"
+            className="mb-1 block text-sm font-medium text-gray-700"
+          >
+            Points type
+          </label>
+          <select
+            id="type"
+            name="tier"
+            ref={potinsTypeRef}
+            className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
+          >
+            <option value={"Tiers points"}>Tiers points</option>
+            <option value={"Standard points"}>Standard points</option>
+          </select>
+        </div>
+      </DialogContent>
+      <DialogActions>
+        <Box sx={{ "& button": { m: 1 } }}>
+          <Button
+            sx={{ color: "#334155" }}
+            onClick={() => {
               setOpenSharePoints(false);
-            }
-          }}
-          aria-labelledby="edit-apartment"
-        >
-          <DialogTitle id="edit-apartment">Share points</DialogTitle>
-          <DialogContent sx={{ width: "450px" }}>
-            <div className="col-span-full">
-              <label
-                htmlFor="phone"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Phone
-              </label>
-              <input
-                id="phone"
-                type="text"
-                name="phone"
-
-                onChange={(e) => {
-                  setInputValue({
-                    ...inputValue,
-                    phone: e.target.value,
-                  });
-                }}
-                autoComplete="phone"
-                required=""
-                className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
-              />
-            </div>
-            <div className="col-span-full">
-              <label
-                htmlFor="phone"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Points
-              </label>
-              <input
-                id="points"
-                type="number"
-                name="points"
-                onChange={(e) => {
-                  setInputValue({
-                    ...inputValue,
-                    points: e.target.value,
-                  });
-                }}
-                required=""
-                className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
-              />
-            </div>
-            <div className="col-span-full">
-              <label
-                htmlFor="type"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Tier
-              </label>
-              <select
-                id="type"
-                name="tier"
-                onChange={(e) => {
-                  setInputValue({
-                    ...inputValue,
-                    tier: e.target.value,
-                  });
-                }}
-                className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
-              >
-                <option value={"choose"}>--Please choose an option--</option>
-                <option value={'Tiers points'}>Tiers points</option>
-                <option value={'Standard points'}>Standard points</option>
-              </select>
-            </div>
-        </DialogContent>
-          <DialogActions>
-            <Box sx={{ "& button": { m: 1 } }}>
-              <Button
-                size={"small"}
-                variant="contained"
-                sx={{
-                  borderRadius: 5,
-                  outline: "none",
-                  border: "none",
-                  stroke: "none",
-                  "&:hover": { backgroundColor: "#1976d2" },
-                }}
-                onClick={() => {
-                  if (openSharePoints) {
-                    setOpenSharePoints(false);
-                  }
-                }}
-              >
-                Cancel
-              </Button>
-              <Button
-                size={"small"}
-                variant="contained"
-                sx={{
-                  borderRadius: 5,
-                  outline: "none",
-                  border: "none",
-                  stroke: "none",
-                  "&:hover": { backgroundColor: "#1976d2" },
-                }}
-                onClick={() => {
-                  if (data.length > 0 && openSharePoints) {
-                    setOpenSharePoints(false);
-                  }
-                  sharePoints();
-                }}
-              >
-                Share
-              </Button>
-            </Box>
-          </DialogActions>
-        </Dialog>
-      )}
-    </div>
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            sx={{ color: "#334155" }}
+            onClick={() => {
+              sharePoints();
+            }}
+          >
+            Share
+          </Button>
+        </Box>
+      </DialogActions>
+    </Dialog>
   );
 };
 

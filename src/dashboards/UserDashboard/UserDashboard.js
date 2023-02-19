@@ -61,7 +61,7 @@ const UserDashboard = (props) => {
       }}
     >
       <Sidenav links={links} sidenavOpen={sidenavOpen} />
-      <main className="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
+      <main className="ease-soft-in-out xl:ml-68.5 relative  rounded-xl transition-all duration-200">
         <Head
           title={props.title}
           sidenavOpen={sidenavOpen}

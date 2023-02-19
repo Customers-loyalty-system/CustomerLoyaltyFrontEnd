@@ -102,7 +102,7 @@ const MembersRelation = () => {
                                 />
                               </div>
                               <div className="flex flex-col justify-center">
-                                <h6 className="mb-1 leading-normal text-sm">
+                                <h6 className="mb-1 capitalize leading-normal text-sm">
                                   {relation.firstMember.User?.name}{" "}
                                   {relation.firstMember.User?.surname}
                                 </h6>
@@ -136,7 +136,7 @@ const MembersRelation = () => {
                                 />
                               </div>
                               <div className="flex flex-col justify-center">
-                                <h6 className="mb-1 leading-normal text-sm">
+                                <h6 className="mb-1 capitalize leading-normal text-sm">
                                   {relation.secondMember.User?.name}{" "}
                                   {relation.secondMember.User?.surname}
                                 </h6>
