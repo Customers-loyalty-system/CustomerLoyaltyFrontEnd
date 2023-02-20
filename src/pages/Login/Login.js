@@ -52,7 +52,7 @@ const Login = () => {
                 <img
                   src="logo512.png"
                   height="40px"
-                  className="h-10 w-auto"
+                  className="h-10 w-auto inline "
                   alt="logo"
                 />
               </a>

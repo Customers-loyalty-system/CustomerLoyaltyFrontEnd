@@ -5,7 +5,7 @@ import Head from "../Head/Head";
 import { Outlet } from "react-router-dom";
 import CardMembershipIcon from "@mui/icons-material/CardMembership";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 const UserDashboard = (props) => {
   const { token, user, logout } = useContext(AuthContext);
@@ -30,7 +30,7 @@ const UserDashboard = (props) => {
       text: "Memberships",
       icon: (
         <CardMembershipIcon
-          sx={{ color: "white", width: "15px", height: "15px" }}
+          sx={{ color: "white", width: "18px", height: "18px" }}
         />
       ),
     },
@@ -39,7 +39,7 @@ const UserDashboard = (props) => {
       text: "Activities",
       icon: (
         <ReceiptLongIcon
-          sx={{ color: "white", width: "15px", height: "15px" }}
+          sx={{ color: "white", width: "18px", height: "18px" }}
         />
       ),
     },
@@ -47,8 +47,8 @@ const UserDashboard = (props) => {
       target: "/user/relations",
       text: "Relations",
       icon: (
-        <GroupAddIcon
-          sx={{ color: "white", width: "15px", height: "15px" }}
+        <PeopleAltIcon
+          sx={{ color: "white", width: "18px", height: "18px" }}
         />
       ),
     },

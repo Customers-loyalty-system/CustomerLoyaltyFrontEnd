@@ -109,7 +109,7 @@ const SharePoints = ({
         </div>
       </DialogContent>
       <DialogActions>
-        <Box sx={{ "& button": { m: 1 } }}>
+        <Box>
           <Button
             sx={{ color: "#334155" }}
             onClick={() => {

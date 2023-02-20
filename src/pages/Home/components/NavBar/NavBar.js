@@ -30,7 +30,7 @@ const Nav = () => {
               </a>
               <a
                 className="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                href="/#get-started-today"
+                href="/userregister"
               >
                 Start today
               </a>
@@ -52,7 +52,7 @@ const Nav = () => {
               href="/userregister"
             >
               <span>
-                Get started <span className="hidden lg:inline">today</span>
+                Get Started <span className="hidden lg:inline">Today</span>
               </span>
             </a>
             <div className="-mr-1 md:hidden">
@@ -139,7 +139,7 @@ const Nav = () => {
                       <a
                         className="block w-full p-2"
                         data-headlessui-state="open"
-                        href="/#get-started-today"
+                        href="/userregister"
                       >
                         Get started
                       </a>

@@ -1,4 +1,5 @@
 import "./Main.css";
+import { PrimaryFeatures } from "./PrimaryFeatures";
 
 const Main = () => {
   return (
@@ -6,7 +7,7 @@ const Main = () => {
       <main>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center lg:pt-32">
           <h1 className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
-            Accounting
+            Bountiful
             <span className="relative whitespace-nowrap text-blue-600">
               <svg
                 aria-hidden="true"
@@ -31,11 +32,11 @@ const Main = () => {
                 made simple <br />
               </span>
             </span>
-            for small businesses.
+            for all businesses.
           </h1>
           <p className="mx-auto mt-10 max-w-2xl text-lg tracking-tight text-slate-700">
-            Most bookkeeping software is accurate, but hard to use. We make the
-            opposite trade-off, and hope you don’t get audited.
+            Manage all your memberships from one place. Enjoy the benefits from
+            all companies and share your points with others.
           </p>
         </div>
         <div className="mt-1 flex justify-center gap-x-6">
@@ -45,7 +46,7 @@ const Main = () => {
           text-white hover:bg-slate-700 hover:text-slate-100 active:bg-slate-800 active:text-slate-300 focus-visible:outline-slate-900`}
             href="/userregister"
           >
-            Get 6 months free
+            Get Started Today
           </a>
           <a
             className={`group inline-flex ring-1 items-center justify-center rounded-full py-2 px-4 text-sm focus:outline-none 
@@ -63,7 +64,7 @@ const Main = () => {
           </a>
         </div>
 
-        <div className="mt-36 lg:mt-44">
+        <div className="mt-40 lg:mt-40 mb-5">
           <p className="font-display text-center text-slate-900">
             Trusted by these six companies so far
           </p>
@@ -140,7 +141,7 @@ const Main = () => {
                 <li className="flex">
                   <img
                     alt="Laravel"
-                    src="https://salient.tailwindui.com/_next/static/media/mirage.18d2ec4e.svg"
+                    src="https://salient.tailwindui.com/_next/static/media/laravel.7deed17e.svg"
                     width="136"
                     height="48"
                     decoding="async"
@@ -165,127 +166,7 @@ const Main = () => {
             </li>
           </ul>
         </div>
-        <section
-          id="features"
-          aria-label="Features for running your books"
-          className="relative mt-12 overflow-hidden bg-blue-600 pt-20 pb-28 sm:py-32"
-        >
-          <img
-            alt="background-features"
-            src="https://salient.tailwindui.com/_next/static/media/background-features.5f7a9ac9.jpg"
-            width="2245"
-            height="1636"
-            decoding="async"
-            data-nimg="1"
-            className="absolute top-1/2 left-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]"
-            loading="lazy"
-            style={{ color: "transparent" }}
-          />
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-            <div className="max-w-2xl md:mx-auto md:text-center xl:max-w-none">
-              <h2 className="font-display text-3xl tracking-tight text-white sm:text-4xl md:text-5xl">
-                Everything you need to run your books.
-              </h2>
-              <p className="mt-6 text-lg tracking-tight text-blue-100">
-                Well everything you need if you aren’t that picky about minor
-                details like tax compliance.
-              </p>
-            </div>
-            <div className="mt-16 grid grid-cols-1 items-center gap-y-2 pt-10 sm:gap-y-6 md:mt-20 lg:grid-cols-12 lg:pt-0">
-              <div className="-mx-4 flex overflow-x-auto pb-4 sm:mx-0 sm:overflow-visible sm:pb-0 lg:col-span-5">
-                <div
-                  className="relative z-10 flex gap-x-4 whitespace-nowrap px-4 sm:mx-auto sm:px-0 lg:mx-0 lg:block lg:gap-x-0 lg:gap-y-1 lg:whitespace-normal"
-                  role="tablist"
-                  aria-orientation="vertical"
-                >
-                  <div
-                    className={`group relative rounded-full py-1 px-4 lg:rounded-r-none 
-                lg:rounded-l-xl lg:p-6 bg-white lg:bg-white/10 lg:ring-1 lg:ring-inset lg:ring-white/10`}
-                  >
-                    <h3>
-                      <button
-                        className={`font-display text-lg [&:not(:focus-visible)]:focus:outline-none text-blue-500 hover:text-blue lg:text-white`}
-                        id="headlessui-tabs-tab-:R2ba9m:"
-                        role="tab"
-                        type="button"
-                        aria-selected="true"
-                        tabIndex="0"
-                        data-headlessui-state="selected"
-                        aria-controls="headlessui-tabs-panel-:Rda9m:"
-                      >
-                        <span className="absolute inset-0 rounded-full lg:rounded-r-none lg:rounded-l-xl"></span>
-                        Payroll
-                      </button>
-                    </h3>
-                    <p className="mt-2 hidden text-sm lg:block text-white">
-                      Keep track of everyone's salaries and whether or not
-                      they've been paid. Direct deposit not supported.
-                    </p>
-                  </div>
-                  <div className="group relative rounded-full py-1 px-4 lg:rounded-r-none lg:rounded-l-xl lg:p-6 hover:bg-white/10 lg:hover:bg-white/5">
-                    <h3>
-                      <button
-                        className={`font-display text-lg [&:not(:focus-visible)]:focus:outline-none text-blue-100 hover:text-white lg:text-white`}
-                        id="headlessui-tabs-tab-:R2ja9m:"
-                        role="tab"
-                        type="button"
-                        aria-selected="false"
-                        tabIndex="-1"
-                        data-headlessui-state=""
-                        aria-controls="headlessui-tabs-panel-:Rla9m:"
-                      >
-                        <span className="absolute inset-0 rounded-full lg:rounded-r-none lg:rounded-l-xl"></span>
-                        Claim expenses
-                      </button>
-                    </h3>
-                    <p className="mt-2 hidden text-sm lg:block text-blue-100 group-hover:text-white">
-                      All of your receipts organized into one place, as long as
-                      you don't mind typing in the data by hand.
-                    </p>
-                  </div>
-                </div>
-                <div className="lg:col-span-7">
-                  <div
-                    id="headlessui-tabs-panel-:Rda9m:"
-                    role="tabpanel"
-                    tabIndex="0"
-                    data-headlessui-state="selected"
-                    aria-labelledby="headlessui-tabs-tab-:R2ba9m:"
-                  ></div>
-                </div>
-              </div>
-              <div className="relative sm:px-6 lg:hidden">
-                <div
-                  className={`absolute -inset-x-4 top-[-6.5rem] bottom-[-4.25rem] 
-                    bg-white/10 ring-1 ring-inset ring-white/10 sm:inset-x-0 sm:rounded-t-xl`}
-                ></div>
-                <p className="relative mx-auto max-w-2xl text-base text-white sm:text-center">
-                  Keep track of everyone's salaries and whether or not they've
-                  been paid. Direct deposit not supported.
-                </p>
-              </div>
-              <div className="mt-10 w-[45rem] overflow-hidden rounded-xl bg-slate-50 shadow-xl shadow-blue-900/20 sm:w-auto lg:mt-0 lg:w-[67.8125rem]">
-                <img
-                  alt=""
-                  sizes="(min-width: 1024px) 67.8125rem, (min-width: 640px) 100vw, 45rem"
-                  srcSet={`https://salient.tailwindui.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpayroll.517af4e7.png&w=640&q=75 640w, 
-                      https://salient.tailwindui.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpayroll.517af4e7.png&w=750&q=75 750w, 
-                      https://salient.tailwindui.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpayroll.517af4e7.png&w=828&q=75 828w, 
-                      https://salient.tailwindui.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpayroll.517af4e7.png&w=1080&q=75 1080w, 
-                      https://salient.tailwindui.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpayroll.517af4e7.png&w=1200&q=75 1200w, 
-                      https://salient.tailwindui.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpayroll.517af4e7.png&w=&q=75 3840w" 
-                      src=https://salient.tailwindui.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fpayroll.517af4e7.png&w=1200&q=75`}
-                  width="2174"
-                  height="1464"
-                  decoding="async"
-                  data-nimg="1"
-                  className="w-full"
-                  style={{ color: "transparent" }}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
+        <PrimaryFeatures/>
         <section
           id="faq"
           aria-labelledby="faq-title"
@@ -314,22 +195,24 @@ const Main = () => {
                 If you can’t find what you’re looking for, email our support
                 team and if you’re lucky someone will get back to you.
               </p>
-            </div>{
-                // eslint-disable-next-line
-              }<ul
+            </div>
+            {
+              // eslint-disable-next-line
+            }<ul
               role="list"
               className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3"
             >
-              <li>{
-                // eslint-disable-next-line
-              }<ul role="list" className="flex flex-col gap-y-8">
+              <li>
+                {
+                  // eslint-disable-next-line
+                }<ul role="list" className="flex flex-col gap-y-8">
                   <li>
                     <h3 className="font-display text-lg leading-7 text-slate-900">
-                      Does TaxPal handle VAT?
+                      Why companeis should register in your website?
                     </h3>
                     <p className="mt-4 text-sm text-slate-700">
-                      Well no, but if you move your company offshore you can
-                      probably ignore it.
+                      Well, customers' loyalty systems are very popular, and
+                      with us, they don't have to have their systems.{" "}
                     </p>
                   </li>
                   <li>
@@ -342,7 +225,7 @@ const Main = () => {
                   </li>
                   <li>
                     <h3 className="font-display text-lg leading-7 text-slate-900">
-                      How do I apply for a job at TaxPal?
+                      How do I apply for a job at Bountiful?
                     </h3>
                     <p className="mt-4 text-sm text-slate-700">
                       We only hire our customers, so subscribe for a minimum of
@@ -351,32 +234,32 @@ const Main = () => {
                   </li>
                 </ul>
               </li>
-              <li>{
-                // eslint-disable-next-line
-              }<ul role="list" className="flex flex-col gap-y-8">
+              <li>
+                {
+                  // eslint-disable-next-line
+                }<ul role="list" className="flex flex-col gap-y-8">
                   <li>
                     <h3 className="font-display text-lg leading-7 text-slate-900">
-                      What was that testimonial about tax fraud all about?
+                      Why users should register in your website?
                     </h3>
                     <p className="mt-4 text-sm text-slate-700">
-                      TaxPal is just a software application, ultimately your
-                      books are your responsibility.
+                      Here you will find a group of companies in one place, so
+                      you don't have to register in each company separately.{" "}
                     </p>
                   </li>
                   <li>
                     <h3 className="font-display text-lg leading-7 text-slate-900">
-                      TaxPal sounds horrible but why do I still feel compelled
-                      to purchase?
+                      Whet teirs do you have?
                     </h3>
                     <p className="mt-4 text-sm text-slate-700">
-                      This is the power of excellent visual design. You just
-                      can’t resist it, no matter how poorly it actually
-                      functions.
+                      For now, we have four tiers, you will start any membership
+                      with a Bronze tier. You can upgrade your tier to Silver,
+                      Gold, and Platinum by collecting tiers points.
                     </p>
                   </li>
                   <li>
                     <h3 className="font-display text-lg leading-7 text-slate-900">
-                      I found other companies called TaxPal, are you sure you
+                      I found other companies called Bountiful, are you sure you
                       can use this name?
                     </h3>
                     <p className="mt-4 text-sm text-slate-700">
@@ -387,26 +270,29 @@ const Main = () => {
                   </li>
                 </ul>
               </li>
-              <li>{
-                // eslint-disable-next-line
-              }<ul role="list" className="flex flex-col gap-y-8">
+              <li>
+                {
+                  // eslint-disable-next-line
+                }<ul role="list" className="flex flex-col gap-y-8">
                   <li>
                     <h3 className="font-display text-lg leading-7 text-slate-900">
-                      How do you generate reports?
+                      What is the difference between tiers points and standard
+                      points?
                     </h3>
                     <p className="mt-4 text-sm text-slate-700">
-                      You just tell us what data you need a report for, and we
-                      get our kids to create beautiful charts for you using only
-                      the finest crayons.
+                      It's clear, by tiers points your tier will be upgraded. By
+                      standard points, you can make a redemption when you reach
+                      the minimum exchange points depending on company
+                      configurations{" "}
                     </p>
                   </li>
                   <li>
                     <h3 className="font-display text-lg leading-7 text-slate-900">
-                      Can we expect more inventory features?
+                      Can we expect more features?
                     </h3>
                     <p className="mt-4 text-sm text-slate-700">
                       In life it’s really better to never expect anything at
-                      all.
+                      all. But probly yes.
                     </p>
                   </li>
                   <li>
@@ -451,7 +337,7 @@ const Main = () => {
                 className="group inline-flex items-center justify-center rounded-full py-2 px-4 text-sm font-semibold focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 bg-white text-slate-900 hover:bg-blue-50 active:bg-blue-200 active:text-slate-600 focus-visible:outline-white mt-10"
                 href="/userregister"
               >
-                Get 6 months free
+                Get Started Today
               </a>
             </div>
           </div>
@@ -482,7 +368,7 @@ const Main = () => {
                 </a>
                 <a
                   className="inline-block rounded-lg py-1 px-2 text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                  href="/#get-started-today"
+                  href="/userregister"
                 >
                   Start today
                 </a>
@@ -532,7 +418,7 @@ const Main = () => {
               </a>
             </div>
             <p className="mt-6 text-sm text-slate-500 sm:mt-0">
-              Copyright © 2023 TaxPal. All rights reserved.
+              Copyright © 2023 Bountiful. All rights reserved.
             </p>
           </div>
         </div>

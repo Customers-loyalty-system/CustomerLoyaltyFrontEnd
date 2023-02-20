@@ -1,6 +1,9 @@
+import { useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+
 const StanderdPoints = ({ membership }) => {
+  const [counter, setCounter] = useState(0);
   const configurations = membership.company.Configurations;
   let maxValue;
   configurations.map((config) => {
@@ -9,7 +12,15 @@ const StanderdPoints = ({ membership }) => {
     }
     return maxValue;
   });
-
+  useEffect(
+    () => {
+      if (counter < membership.standardPoints) {
+        setCounter(membership.standardPoints);
+      }
+    },
+    // eslint-disable-next-line
+    [membership.standardPoints]
+  );
   return (
     <>
       <div className="text-center font-medium text-black">Standard points</div>
@@ -27,12 +38,12 @@ const StanderdPoints = ({ membership }) => {
           styles={buildStyles({
             rotation: 0.63,
             pathColor: `#1d4ed8`,
-            textColor: "black",
-            textSize: "12px",
+            textColor: "#67747D",
+            textSize: "14px",
           })}
-          strokeWidth={7}
+          strokeWidth={5}
           circleRatio={0.75}
-          value={membership.standardPoints}
+          value={counter}
           maxValue={
             membership.standardPoints > maxValue
               ? (maxValue = membership.standardPoints)

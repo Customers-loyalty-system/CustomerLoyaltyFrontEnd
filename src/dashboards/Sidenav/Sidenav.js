@@ -27,9 +27,6 @@ const Sidenav = ({ links, sidenavOpen  }) => {
               className="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
               alt="main_logo"
             />
-            <span className="ml-1 font-semibold transition-all duration-200 ease-nav-brand">
-              Soft UI Dashboard
-            </span>
           </NavLink>
         </div>
         <hr className="h-0.5  mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent"/>

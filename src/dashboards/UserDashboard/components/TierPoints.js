@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const TierPoints = ({ membership }) => {
+  const [counter, setCounter] = useState(0);
+
   const configurations = membership.company.Configurations;
   let maxValue = 0;
   function bubbleSort(arr) {
@@ -28,25 +31,39 @@ const TierPoints = ({ membership }) => {
     }
   };
   nextTier();
+  useEffect(
+    () => {
+      if (counter < membership.tiersPoints) {
+        setCounter(membership.tiersPoints);
+      }
+    },
+    // eslint-disable-next-line
+    [membership.tiersPoints]
+  );
+
   const colors = {
-    Bronze: "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
-    Silver: "#9ca3af",
-    Gold: "#facc15",
-    Platinum: "radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)",
+    Bronze: "#ad8a56",
+    Silver: "#B4B4B4",
+    Gold: "#DAA520",
+    Platinum: "#71717a",
   };
+
   return (
     <>
       <div className="text-center font-medium text-black">Tier points</div>
       <div className="text-sm">
-        {maxValue == 0
+        {maxValue === 0
           ? `You reached the highst Tier`
           : ` Balance : ${membership.tiersPoints} / Upgrade on : ${maxValue}`}
       </div>
 
       <div
-        className="text-center mt-2 font-medium"
-        style={{ color: colors[membership.membershipTier] }}
+        className={`text-center mt-2 text-transparent font-semibold`}
+        style={{
+          color: colors[membership.membershipTier],
+        }}
       >
+        {console.log(colors[membership.membershipTier])}
         {membership.membershipTier}
       </div>
 
@@ -58,12 +75,12 @@ const TierPoints = ({ membership }) => {
           styles={buildStyles({
             rotation: 0.63,
             pathColor: colors[membership.membershipTier],
-            textColor: colors[membership.membershipTier],
-            textSize: "12px",
+            textColor: "#67747D",
+            textSize: "14px",
           })}
           strokeWidth={5}
           circleRatio={0.75}
-          value={membership.tiersPoints}
+          value={counter}
           maxValue={
             membership.tiersPoints > maxValue
               ? (maxValue = membership.tiersPoints)

@@ -97,7 +97,7 @@ const Activitiy = () => {
                         </span>
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                        <span className="font-semibold leading-tight text-xs text-slate-400">
+                        <span className="font-semibold leading-tight capitalize text-xs text-slate-400">
                           {activity.Membership.Company.name}
                         </span>
                       </td>
