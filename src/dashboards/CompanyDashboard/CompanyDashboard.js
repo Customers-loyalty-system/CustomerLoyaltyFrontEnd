@@ -73,7 +73,7 @@ const CompanyDashboard = (props) => {
   return (
     <>
       <div 
-        className="m-0 h-auto min-h-screen font-sans antialiased font-normal text-base leading-default bg-gray-50 text-slate-500"
+        className="m-0 h-auto min-h-screen  antialiased font-normal text-base leading-default bg-gray-50 text-slate-500"
         onClick={() => {
           if (sidenavOpen) setSidenavOpen(false);
         }}

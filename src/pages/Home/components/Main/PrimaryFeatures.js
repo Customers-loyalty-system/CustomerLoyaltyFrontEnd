@@ -4,9 +4,9 @@ import clsx from 'clsx'
 
 import { Container } from './continer'
 import backgroundImage from '../../../images/background-features.jpg'
-import screenshotExpenses from '../../../images/screenshots/expenses.png'
+import screenshotExpenses from '../../../images/screenshots/companyDashboard.png'
 import screenshotUser from '../../../images/screenshots/userDashboard.png'
-import screenshotVatReturns from '../../../images/screenshots/vat-returns.png'
+import screenshotVatReturns from '../../../images/screenshots/activities.png'
 
 const features = [
   {
