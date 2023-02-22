@@ -38,7 +38,8 @@ const Activitiy = () => {
   }, [page]);
 
   return (
-    <div className="flex flex-wrap -mx-3">
+    <>
+    {activities.length > 0 ?<div className="flex flex-wrap -mx-3">
       <div className="flex-none w-full max-w-full px-3">
         <div className="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
           <div className="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
@@ -83,29 +84,29 @@ const Activitiy = () => {
                       </td>
                       <td className="p-2 text-center bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <p className="mb-0 font-semibold leading-tight text-xs">
-                          {activity.Membership.membershipNumber}
+                          {activity?.Membership?.membershipNumber}
                         </p>
                       </td>
                       <td className="p-2 leading-normal text-center align-middle bg-transparent border-b text-sm whitespace-nowrap shadow-transparent">
                         <span className="font-semibold leading-tight text-xs text-slate-400">
-                          {activity.standardPoints}
+                          {activity?.standardPoints}
                         </span>
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <span className="font-semibold leading-tight text-xs text-slate-400">
-                          {activity.tiersPoints}
+                          {activity?.tiersPoints}
                         </span>
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <span className="font-semibold leading-tight capitalize text-xs text-slate-400">
-                          {activity.Membership.Company.name}
+                          {activity?.Membership?.Company?.name}
                         </span>
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                         <span className="font-semibold leading-tight text-xs text-slate-400">
                           {activity?.Bill?.billNumber == null
                             ? "-"
-                            : activity.Bill.billNumber}
+                            : activity?.Bill?.billNumber}
                         </span>
                       </td>
                       <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
@@ -124,7 +125,15 @@ const Activitiy = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div>:<div className="flex flex-wrap -mx-3">
+          <div className="flex-none w-full max-w-full px-3">
+            <div className="relative flex flex-col min-w-0 mb-8 text-center mt-10">
+            there is no activities yet
+            </div>
+          </div>
+        </div>}
+    </>
+
   );
 };
 
