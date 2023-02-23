@@ -63,7 +63,6 @@ const TierPoints = ({ membership }) => {
           color: colors[membership.membershipTier],
         }}
       >
-        {console.log(colors[membership.membershipTier])}
         {membership.membershipTier}
       </div>
 

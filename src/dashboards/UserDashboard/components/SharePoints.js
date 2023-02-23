@@ -22,7 +22,6 @@ const SharePoints = ({
   const phoneRef = useRef();
   const pointsRef = useRef();
   const potinsTypeRef = useRef();
-  console.log(membership)
   const sharePoints = async () => {
     const response = await UseFetch(
       `${process.env.REACT_APP_API_SHARE_POINTS}`,

@@ -1,4 +1,4 @@
-import { useContext,  useState } from "react";
+import { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -9,13 +9,14 @@ import { AlertContex } from "../../../context/AlertContext";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import UseFetch from "../../../custom/UseFetch";
 import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
   const [adminDelete, setAdminDelete] = useState(false);
   const { token, user, setUser, login, logout } = useContext(AuthContext);
   const { toggleOn } = useContext(AlertContex);
   const navigate = useNavigate();
-
+  const passwprdRef = useRef()
   const handleClose = () => {
     setAdminProfile(false);
   };
@@ -29,7 +30,7 @@ const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
         body: JSON.stringify({
           name: user.name,
           email: user.email,
-          password: user.password,
+          password: passwprdRef.current.value ,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -133,40 +134,34 @@ const AdminsProfile = ({ setAdminProfile, adminProfile }) => {
                 type="password"
                 name="password"
                 autoComplete="new-password"
-                onChange={(e) => {
-                  setUser({
-                    ...user,
-                    password: e.target.value,
-                  });
-                }}
+                ref={passwprdRef}
                 required=""
                 className="block w-full appearance-none rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-blue-500 sm:text-sm"
               />
             </div>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button
-            sx={{
-              color: "#fff",
-              fontSize: "10px",
-              marginRight: "140px",
-              backgroundColor: "#dc2626",
-              "&:hover": {
-                backgroundColor: "#ef4444",
-              },
-            }}
+        <DialogActions
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "20px",
+          }}
+        >
+          <button
+            className="bg-[#dc2626] text-white border-0 rounded-md text-[10px] w-1/3 h-8 hover:bg-[#ef4444]"
             onClick={() => setAdminDelete(true)}
           >
             DELETE YOUR ACCOUNT
-          </Button>
-
-          <Button sx={{ color: "#334155" }} onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button type="submit" form="updateForm" sx={{ color: "#334155" }}>
-            Update
-          </Button>
+          </button>
+          <div>
+            <Button sx={{ color: "#334155" }} onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button type="submit" form="updateForm" sx={{ color: "#334155" }}>
+              Update
+            </Button>
+          </div>
         </DialogActions>
       </Dialog>
 

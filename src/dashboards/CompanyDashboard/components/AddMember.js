@@ -14,7 +14,6 @@ const AddMember = ({ addMember, setAddMember, setMembers }) => {
   const { toggleOn } = useContext(AlertContex);
 
   const addNewMember = async () => {
-    console.log(phoneRef.current.value);
     const response = await UseFetch(
       process.env.REACT_APP_API_COMPANY_ADD_MEMBERSHIP,
       "POST",

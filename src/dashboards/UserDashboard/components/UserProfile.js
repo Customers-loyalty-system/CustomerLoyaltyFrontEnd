@@ -261,19 +261,12 @@ const UserProfile = ({ userProfile, setUserProfile }) => {
             padding: "20px",
           }}
         >
-          <Button
-            sx={{
-              color: "#fff",
-              fontSize: "10px",
-              backgroundColor: "#dc2626",
-              "&:hover": {
-                backgroundColor: "#ef4444",
-              },
-            }}
+          <button
+            className="bg-[#dc2626] text-white border-0 rounded-md text-[10px] w-1/3 h-8 hover:bg-[#ef4444]"
             onClick={() => setUserDelete(true)}
           >
             DELETE YOUR ACCOUNT
-          </Button>
+          </button>
           <div>
             <Button sx={{ color: "#334155" }} onClick={handleClose}>
               Cancel

@@ -21,9 +21,7 @@ const Members = () => {
       null,
       { "Content-Type": "Application/json", authorization: `Bearer ${token}` }
     );
-    console.log(response);
     if ((await response.data.count) > 0) {
-      console.log("test");
       setMembers([...response.data.members]);
       setPageCount(response.data.pageCount);
       toggleOn(response.messages, response.success);

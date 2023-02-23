@@ -75,7 +75,6 @@ const Configurations = () => {
   };
 
   const addConfiguration = async () => {
-    console.log(keyRef.current.value, valueRef.current.value);
     const configuration = await UseFetch(
       process.env.REACT_APP_API_DELETE_CONFIGURATION,
       "POST",

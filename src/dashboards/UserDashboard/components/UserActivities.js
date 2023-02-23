@@ -21,7 +21,6 @@ const UserActivities = () => {
       { "Content-Type": "application/json", authorization: `Bearer ${token}` }
     );
     if (await activities.success) {
-      console.log(activities);
       setActivities([...activities.data.rows]);
       setPageCount(activities.data.pageCount);
       toggleOn(activities.messages, activities.success);

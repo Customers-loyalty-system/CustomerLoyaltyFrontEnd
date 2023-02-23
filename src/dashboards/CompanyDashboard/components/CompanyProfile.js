@@ -52,7 +52,7 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
       setCompanyDelete(false);
       handleClose();
       logout();
-      navigate('/')
+      navigate("/");
     } else {
       toggleOn(response.messages, response.success);
     }
@@ -202,7 +202,6 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
                 name="logo"
                 autoComplete="logo"
                 required=""
-
                 className="block w-full text-sm text-slate-500
             file:mr-4 file:py-2 file:px-4
             file:rounded-full file:border-0
@@ -213,25 +212,27 @@ const CompanyProfile = ({ setCompanyProfile, companyProfile }) => {
             </div>
           </form>
         </DialogContent>
-        <DialogActions>
-          <Button
-            sx={{
-              color: "#fff",
-              fontSize: "10px",
-              marginRight: "140px",
-              backgroundColor: "#dc2626",
-              "&:hover": {
-                backgroundColor: "#ef4444",
-              },
-            }} onClick={() => setCompanyDelete(true)}>
-            DETELTE YOUR ACCOUNT
-          </Button>
-          <Button sx={{ color: "#334155" }} onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button type="submit" form="updateForm" sx={{ color: "#334155" }}>
-            Update
-          </Button>
+        <DialogActions
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "20px",
+          }}
+        >
+          <button
+            className="bg-[#dc2626] text-white border-0 rounded-md text-[10px] w-1/3 h-8 hover:bg-[#ef4444]"
+            onClick={() => setCompanyDelete(true)}
+          >
+            DELETE YOUR ACCOUNT
+          </button>
+          <div>
+            <Button sx={{ color: "#334155" }} onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button type="submit" form="updateForm" sx={{ color: "#334155" }}>
+              Update
+            </Button>
+          </div>
         </DialogActions>
       </Dialog>
 
