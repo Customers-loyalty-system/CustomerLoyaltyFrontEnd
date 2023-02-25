@@ -249,7 +249,7 @@ const Main = () => {
                   </li>
                   <li>
                     <h3 className="font-display text-lg leading-7 text-slate-900">
-                      Whet teirs do you have?
+                      What tiers do you have?
                     </h3>
                     <p className="mt-4 text-sm text-slate-700">
                       For now, we have four tiers, you will start any membership

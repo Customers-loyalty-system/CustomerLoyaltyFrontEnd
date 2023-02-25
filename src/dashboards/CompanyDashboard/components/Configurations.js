@@ -170,7 +170,7 @@ const Configurations = () => {
         <Dialog open={createStandardConfiguration} onClose={handleClose}>
           <DialogTitle>Create Configuration</DialogTitle>
           <div className="m-4  text-slate-700">
-            <span> When the memner have </span>
+            <span> When the member have </span>
             <input
               type="number"
               className="w-[100px] border-x-0 border-t-0 border-b-1  mx-2"
@@ -203,7 +203,7 @@ const Configurations = () => {
         <Dialog open={createTierConfiguration} onClose={handleClose}>
           <DialogTitle>Create Configuration</DialogTitle>
           <div className="m-4  text-slate-700">
-            <span> When the memner have </span>
+            <span> When the member have </span>
             <input
               type="number"
               className="w-[100px] border-x-0 border-t-0 border-b-1  mx-2"
@@ -253,12 +253,12 @@ const Configurations = () => {
           </DialogContent>
           <DialogActions>
             <Button
-              sx={{ border: "0px" }}
+              sx={{ border: "0px", color: "#334155" }}
               onClick={handleDelelteConfigurationClose}
             >
               Disagree
             </Button>
-            <Button onClick={handleDeleteRule}>Agree</Button>
+            <Button sx={{ color: "#334155" }} onClick={handleDeleteRule}>Agree</Button>
           </DialogActions>
         </Dialog>
       </div>

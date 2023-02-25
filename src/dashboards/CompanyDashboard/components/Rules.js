@@ -197,10 +197,10 @@ const Rules = () => {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button sx={{ border: "0px" }} onClick={handleDelelteRuleClose}>
+            <Button sx={{ border: "0px" ,color: "#334155" }} onClick={handleDelelteRuleClose}>
               Disagree
             </Button>
-            <Button onClick={handleDeleteRule}>Agree</Button>
+            <Button sx={{ color: "#334155" }} onClick={handleDeleteRule}>Agree</Button>
           </DialogActions>
         </Dialog>
       </div>

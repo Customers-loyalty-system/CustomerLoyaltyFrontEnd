@@ -35,13 +35,6 @@ const CompanyDashboard = (props) => {
       ),
     },
     {
-      target: "/company/membersactivities",
-      text: "Activities",
-      icon: (
-        <ReorderIcon sx={{ color: "white", width: "18px", height: "18px" }} />
-      ),
-    },
-    {
       target: "/company/rules",
       text: "Rules",
       icon: (
@@ -67,6 +60,13 @@ const CompanyDashboard = (props) => {
       text: "Members Relations",
       icon: (
         <PeopleAltIcon sx={{ color: "white", width: "18px", height: "18px" }} />
+      ),
+    },
+    {
+      target: "/company/membersactivities",
+      text: "Activities",
+      icon: (
+        <ReorderIcon sx={{ color: "white", width: "18px", height: "18px" }} />
       ),
     },
   ];

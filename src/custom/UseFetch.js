@@ -19,7 +19,6 @@ const UseFetch = async (
     });
   }
   const response = await connect.json();
-  console.log("response.messages ==> ", response.messages);
   return response;
 };
 
